@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { setLoginFormValue, singIn } from '../../services/actions/auth';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import styles from './login.module.css';
-import { getCookie } from '../../utils/utils';
 
 export const Login = () => {
 	const dispatch = useDispatch();

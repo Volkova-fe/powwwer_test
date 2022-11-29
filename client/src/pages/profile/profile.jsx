@@ -1,32 +1,28 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, Redirect, useHistory, useLocation, Route, Router } from 'react-router-dom';
-import { removeUserRequest } from '../../API/register-api';
-import { getUser, removeUser, singOut } from '../../services/actions/auth';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
+import { removeUser, singOut } from '../../services/actions/auth';
 import { deleteCookie, getCookie } from '../../utils/utils';
 import styles from './profile.module.css';
 
 export const Profile = () => {
 	const dispatch = useDispatch();
-	const location = useLocation();
 	const history = useHistory();
 	const cookie = getCookie('token');
-	const { email, name, id, token } = useSelector(state => state.auth.user);
+	const { email } = useSelector(state => state.auth.user);
 	const { auth } = useSelector(state => state.auth);
 
-	const onLogoutClick = () => {
+	const onLogoutClick = useCallback(() => {
 		dispatch(singOut());
-	};
+	}, []);
 
 	const onRemoveUser = useCallback(() => {
 		dispatch(removeUser(email));
-		deleteCookie('token');
-		history.push('/')
 	}, [cookie]);
 
 
-	if (!auth) {
+	if (!auth && !cookie) {
 		return <Redirect to="/" />
 	}
 

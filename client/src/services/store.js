@@ -1,5 +1,5 @@
 import React from 'react';
-import { compose, legacy_createStore as createStore, applyMiddleware } from 'redux';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './reducers/index';
 import thunk from 'redux-thunk';
 

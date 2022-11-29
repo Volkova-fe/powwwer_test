@@ -76,6 +76,7 @@ export const authReducer = (state = initialState, action) => {
 		case GET_USER_SUCCESS: {
 			return {
 				...state,
+				auth: true,
 				user: action.user,
 				getUserRequest: false,
 				getUserFailed: false,
@@ -96,19 +97,7 @@ export const authReducer = (state = initialState, action) => {
 			};
 		}
 		case REMOVE_USER_SUCCESS: {
-			return {
-				...state,
-				auth: false,
-				user: {
-					...state.user,
-					email: '',
-					name: '',
-					token: '',
-					id: ''
-				},
-				removeRequest: false,
-				removeFailed: false,
-			};
+			return initialState;
 		}
 		case LOGIN_FORM_SET_VALUE: {
 			return {
