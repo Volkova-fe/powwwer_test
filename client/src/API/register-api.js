@@ -1,13 +1,7 @@
 import { BASE_URL } from '../utils/constants'
 import { getCookie } from '../utils/utils';
+import { checkResponse } from './utils';
 
-export const checkResponse = res => {
-	if (res.ok) {
-		return res.json();
-	} else {
-		return Promise.reject(`Ошибка: code ${res.status}`);
-	}
-}
 
 export const resgisterUserRequest = async (email, password, name) => {
 	return await fetch(`${BASE_URL}/api/user/registration`, {

@@ -206,25 +206,6 @@ export const authReducer = (state = initialState, action) => {
 				loginSuccess: true,
 			};
 		}
-		case UPDATE_TOKEN_REQUEST:
-			return {
-				...state,
-				updateTokenRequest: true,
-				updateTokenFailed: false,
-			}
-		case UPDATE_TOKEN_FAILED:
-			return {
-				...state,
-				updateTokenRequest: false,
-				updateTokenFailed: true,
-			}
-		case UPDATE_TOKEN_SUCCESS:
-			return {
-				...state,
-				updateTokenRequest: false,
-				updateTokenSuccess: true,
-				updateTokenFailed: false,
-			}
 		default: {
 			return state;
 		}

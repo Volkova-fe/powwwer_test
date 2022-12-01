@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "cookie-parser": "^1.4.6",
-    "fastify-cookie": "^5.7.0"
-  }
-}

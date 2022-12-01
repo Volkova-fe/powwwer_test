@@ -23,7 +23,7 @@ class UserController {
 			}
 			const candidate = await User.findOne({ where: { email } })
 			if (candidate) {
-				return next(ApiError.badRequest('Пользователь с таким email уже существует'))
+				return next(ApiError.regRequest('Пользователь с таким email уже существует'))
 			}
 			const hashPassword = await bcrypt.hash(password, 5)
 			const user = await User.create({ email, name, password: hashPassword, role })
@@ -46,7 +46,7 @@ class UserController {
 			return next(ApiError.internal('Указан не верный пароль'))
 		}
 		const token = generateJwt(user.id, user.email, user.role, user.name)
-		return res.json({ email, token })
+		return res.json({ email, token, id: user.id })
 	}
 
 	async logout(req, res, next) {
