@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { registerUser, setRegisterFormValue } from '../../services/actions/auth';
-import { getCookie } from '../../utils/utils';
 import styles from './register.module.css';
+
 
 export const Register = () => {
 	const dispatch = useDispatch();
@@ -29,7 +29,10 @@ export const Register = () => {
 	return (
 		<div className={styles.container}>
 			<h2 className={`${styles.title} text text_type_main-medium pb-6`}>Регистрация</h2>
-			<form className={styles.form} onSubmit={onFormSubmit}>
+			<form
+				className={styles.form}
+				onSubmit={onFormSubmit}
+			>
 				<div className="pb-6">
 					<Input
 						type={'text'}
@@ -42,17 +45,37 @@ export const Register = () => {
 					/>
 				</div>
 				<div className="pb-6">
-					<EmailInput onChange={onChange} value={email} name={'email'} size="default" />
+					<EmailInput
+						onChange={onChange}
+						value={email}
+						name={'email'}
+						size="default"
+
+					/>
 				</div>
 				<div className="pb-6">
-					<PasswordInput onChange={onChange} value={password} name={'password'} size="default" />
+					<PasswordInput
+						onChange={onChange}
+						value={password}
+						name={'password'}
+						size="default"
+					/>
 				</div>
-				<Button htmlType="submit" type="primary" size="medium">
+				<Button
+					htmlType="submit"
+					type="primary"
+					size="medium"
+				>
 					Зарегистрироваться
 				</Button>
 			</form>
-			<p className="text text_type_main-default text_color_inactive pt-20 pb-4">Уже зарегистрированы?
-				<Link className={styles.link} to='/'>Войти</Link>
+			<p className="text text_type_main-default text_color_inactive pt-20 pb-4">
+				Уже зарегистрированы?
+				<Link
+					className={styles.link}
+					to='/'>
+					Войти
+				</Link>
 			</p>
 		</div >)
 }

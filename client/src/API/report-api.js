@@ -20,11 +20,11 @@ export const trackerUser = async (type, time, date, id) => {
 }
 
 export const getReportRequest = async (date, id) => {
-	return await fetch(`${BASE_URL}/api/tracker/${id}`, {
+	return await fetch(`${BASE_URL}/api/tracker/${id}/${date}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: 'Bearer ' + getCookie('token'),
+			Authorization: 'Bearer ' + getCookie('token')
 		},
 	})
 		.then(res => checkResponse(res));

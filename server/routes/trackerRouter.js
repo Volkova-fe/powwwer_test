@@ -4,7 +4,7 @@ const trackerController = require('../controllers/trackerController')
 
 
 router.post('/action', trackerController.create)
-router.get('/:id', trackerController.getAll)
+router.get('/:id/:date', trackerController.getAll)
 
 
 module.exports = router

@@ -13,5 +13,8 @@ module.exports = new Sequelize(
             typeCast: true,
             timezone: "+7:00"
         },
+        idleTimeoutMillis: 1,
+        max: 10,
+        connectionTimeoutMillis: 1000,
     }
 )

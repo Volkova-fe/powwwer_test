@@ -4,17 +4,21 @@ const sequelize = require('./db')
 const cookieParser = require('cookie-parser')
 const models = require('./models/models')
 const cors = require('cors')
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./open-api-doc.json')
 const router = require('./routes/index')
 const errorHandler = require('./middleware/ErrorHandlingMiddleware')
 
+
 const PORT = process.env.PORT || 5003
+
 
 const app = express()
 app.use(cors())
 app.use(cookieParser())
 app.use(express.json())
 app.use('/api', router)
-
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 app.use(errorHandler)
 
@@ -26,6 +30,8 @@ const start = async () => {
     } catch (e) {
         console.log(e)
     }
+
+
 }
 
 

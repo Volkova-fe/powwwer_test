@@ -16,9 +16,6 @@ import {
 	REGISTER_FORM_REQUEST,
 	REGISTER_FORM_SET_VALUE,
 	REGISTER_FORM_SUCCESS,
-	UPDATE_TOKEN_FAILED,
-	UPDATE_TOKEN_REQUEST,
-	UPDATE_TOKEN_SUCCESS
 } from "../actions/auth";
 
 
@@ -77,7 +74,7 @@ export const authReducer = (state = initialState, action) => {
 			return {
 				...state,
 				auth: true,
-				user: action.user,
+				user: action.playload,
 				getUserRequest: false,
 				getUserFailed: false,
 			};
@@ -125,7 +122,7 @@ export const authReducer = (state = initialState, action) => {
 		case LOGIN_FORM_SUCCESS: {
 			return {
 				...state,
-				user: action.user,
+				user: action.playload,
 				form: {
 					...state.form,
 					email: '',
@@ -193,7 +190,7 @@ export const authReducer = (state = initialState, action) => {
 		case REGISTER_FORM_SUCCESS: {
 			return {
 				...state,
-				user: action.user,
+				user: action.playload,
 				form: {
 					...state.form,
 					email: '',

@@ -1,0 +1,390 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Work tracker API",
+    "description": "Work tracker API",
+    "version": "1.0.0"
+  },
+  "host": "localhost:5002/api",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/user/registration": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "description": "Add a new user to the base",
+        "parameters": [
+          {
+            "name": "Registration",
+            "in": "body",
+            "description": "Create a new user to the base",
+            "schema": {
+              "$ref": "#/definitions/Registration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registration success",
+            "schema": {
+              "$ref": "#/definitions/RegistrationSuccess"
+            }
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "409": {
+            "description": "User already exists in the base"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "description": "Login user",
+        "parameters": [
+          {
+            "name": "Login",
+            "in": "body",
+            "description": "Login user",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login success",
+            "schema": {
+              "$ref": "#/definitions/LoginSuccess"
+            }
+          },
+          "400": {
+            "description": "Invalid request data"
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "description": "Logout user",
+        "parameters": [
+          {
+            "name": "Logout",
+            "in": "body",
+            "description": "Logout user",
+            "schema": {
+              "$ref": "#/definitions/Logout"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logout success",
+            "schema": {
+              "$ref": "#/definitions/LogoutSuccess"
+            }
+          },
+          "400": {
+            "description": "Invalid request data"
+          }
+        }
+      }
+    },
+    "/user/delete": {
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "description": "Remove user",
+        "parameters": [
+          {
+            "name": "Remove",
+            "in": "body",
+            "description": "Remove user",
+            "schema": {
+              "$ref": "#/definitions/Remove"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Remove success",
+            "schema": {
+              "$ref": "#/definitions/RemoveSuccess"
+            }
+          },
+          "400": {
+            "description": "Invalid request data"
+          }
+        }
+      }
+    },
+    "/user/auth": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "description": "Check authorization user. Dont forget add Bearer with space",
+        "parameters": [
+          {
+            "name": "authorization",
+            "security": [
+              {
+                "Bearer": []
+              }
+            ],
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization success",
+            "schema": {
+              "$ref": "#/definitions/AuthSuccess"
+            }
+          },
+          "401": {
+            "description": "Authorization failed"
+          }
+        }
+      }
+    },
+    "/tracker/action": {
+      "post": {
+        "tags": [
+          "tracker"
+        ],
+        "description": "Add a new track to the base",
+        "parameters": [
+          {
+            "name": "TrackerCreate",
+            "in": "body",
+            "description": "Create a new track to the base",
+            "schema": {
+              "$ref": "#/definitions/TrackerCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Track create success",
+            "schema": {
+              "$ref": "#/definitions/TrackerCreateSuccess"
+            }
+          },
+          "400": {
+            "description": "Invalid request data"
+          }
+        }
+      }
+    },
+    "/tracker/{id}/{date}": {
+      "get": {
+        "tags": [
+          "tracker"
+        ],
+        "description": "Get all tracks from base",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid request data"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Registration": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "123@ya.ru"
+        },
+        "password": {
+          "type": "string",
+          "example": "hello123"
+        },
+        "name": {
+          "type": "string",
+          "example": "Maria"
+        }
+      }
+    },
+    "RegistrationSuccess": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "123@ya.ru"
+        },
+        "name": {
+          "type": "string",
+          "example": "Maria"
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImVtYWlsIjoiMTIzQHlhLnJ1Iiwicm9sZSI6Ik1hcmlhIiwibmFtZSI6IlVTRVIiLCJpYXQiOjE2NzAwNzY2NzYsImV4cCI6MTY3MDE2MzA3Nn0.9ry9KvUd9zQFRgern1dQ2DOAEpj3PymUgAizY32qSAU"
+        },
+        "id": {
+          "type": "string",
+          "example": "1"
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "123@ya.ru"
+        },
+        "password": {
+          "type": "string",
+          "example": "hello123"
+        }
+      }
+    },
+    "LoginSuccess": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "123@ya.ru"
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImVtYWlsIjoiMTIzQHlhLnJ1Iiwicm9sZSI6Ik1hcmlhIiwibmFtZSI6IlVTRVIiLCJpYXQiOjE2NzAwNzY2NzYsImV4cCI6MTY3MDE2MzA3Nn0.9ry9KvUd9zQFRgern1dQ2DOAEpj3PymUgAizY32qSAU"
+        },
+        "id": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "Logout": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImVtYWlsIjoiMTIzQHlhLnJ1Iiwicm9sZSI6Ik1hcmlhIiwibmFtZSI6IlVTRVIiLCJpYXQiOjE2NzAwNzY2NzYsImV4cCI6MTY3MDE2MzA3Nn0.9ry9KvUd9zQFRgern1dQ2DOAEpj3PymUgAizY32qSAU"
+        }
+      }
+    },
+    "LogoutSuccess": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "success"
+        }
+      }
+    },
+    "Remove": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "123@ya.ru"
+        }
+      }
+    },
+    "RemoveSuccess": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Пользователь удален"
+        }
+      }
+    },
+    "AuthSuccess": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "email": {
+          "type": "string",
+          "example": "123@ya.ru"
+        },
+        "name": {
+          "type": "string",
+          "example": "Maria"
+        }
+      }
+    },
+    "TrackerCreate": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "Начал"
+        },
+        "time": {
+          "type": "string",
+          "example": "10:22:55"
+        },
+        "date": {
+          "type": "string",
+          "example": "2022-12-02"
+        },
+        "id": {
+          "type": "string",
+          "example": "1"
+        }
+      }
+    },
+    "TrackerCreateSuccess": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "success"
+        }
+      }
+    },
+    "TrackerBase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1"
+        },
+        "date": {
+          "type": "string",
+          "example": "2022-12-02"
+        }
+      }
+    }
+  }
+}

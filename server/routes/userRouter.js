@@ -7,6 +7,9 @@ router.post('/registration', userController.registration)
 router.post('/login', userController.login)
 router.post('/logout', userController.logout);
 router.delete('/delete', userController.remove)
-router.get('/auth', authMiddleware, userController.check)
 
-module.exports = router
+
+
+ router.get('/auth', authMiddleware, userController.check)
+
+ module.exports = router

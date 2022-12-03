@@ -9,7 +9,12 @@ export const NotFound404 = () => {
 		<div className={`${styles.container} pt-30 pb-30`}>
 			<p className="text text_type_digits-large">404</p>
 			<p className="text text_type_main-medium">Страница не найдена</p>
-			<Link to='/' className={`${styles.link} text text_type_main-medium text_color_inactive pt-10`}>Перейти на главную страницу</Link>
+			<Link
+				to='/'
+				className={`${styles.link} text text_type_main-medium text_color_inactive pt-10`}
+			>
+				Перейти на главную страницу
+			</Link>
 		</div >
 	)
 }

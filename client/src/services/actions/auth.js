@@ -12,7 +12,6 @@ export const GET_USER_REQUEST = 'GET_USER_REQUEST';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_FAILED = 'GET_USER_FAILED';
 
-
 export const REGISTER_FORM_SET_VALUE = 'REGISTER_FORM_SET_VALUE';
 export const REGISTER_FORM_REQUEST = 'REGISTER_FORM_REQUEST';
 export const REGISTER_FORM_SUCCESS = 'REGISTER_FORM_SUCCESS';
@@ -31,10 +30,6 @@ export const REMOVE_USER_REQUEST = 'REMOVE_USER_REQUEST';
 export const REMOVE_USER_SUCCESS = 'REMOVE_USER_SUCCESS';
 export const REMOVE_USER_FAILED = 'REMOVE_USER_FAILED';
 
-export const UPDATE_TOKEN_REQUEST = 'UPDATE_TOKEN_REQUEST';
-export const UPDATE_TOKEN_SUCCESS = 'UPDATE_TOKEN_SUCCESS';
-export const UPDATE_TOKEN_FAILED = 'UPDATE_TOKEN_FAILED';
-
 export function getUser() {
 	return function (dispatch) {
 		dispatch({
@@ -44,7 +39,7 @@ export function getUser() {
 			.then((res) => {
 				dispatch({
 					type: GET_USER_SUCCESS,
-					user: res,
+					playload: res,
 				});
 			})
 			.catch(() => {
@@ -75,7 +70,7 @@ export function registerUser(email, password, name) {
 			.then((res) => {
 				dispatch({
 					type: REGISTER_FORM_SUCCESS,
-					user: res,
+					playload: res,
 				});
 			})
 			.catch(() => {
@@ -106,7 +101,7 @@ export function singIn(email, password) {
 			.then((res) => {
 				dispatch({
 					type: LOGIN_FORM_SUCCESS,
-					user: res,
+					playload: res,
 				});
 			})
 			.catch(() => {

@@ -6,7 +6,7 @@ import {
 
 
 const initialState = {
-	tracker: null,
+	report: null,
 	getReportRequest: false,
 	getReportFailed: false,
 
@@ -30,8 +30,8 @@ export const reportReducer = (state = initialState, action) => {
 		}
 		case GET_REPORT_SUCCESS: {
 			return {
-				...state,
-				tracker: action.tracker,
+				state,
+				report: action.playload,
 				getReportRequest: false,
 				getReportFailed: false,
 			};

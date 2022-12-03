@@ -1,3 +1,5 @@
+import { getHours, getMinutes, getSeconds, getYear, getMonth, getDate } from 'date-fns'
+
 export function getCookie(name) {
 	const matches = document.cookie.match(
 		new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
@@ -30,4 +32,13 @@ export function setCookie(name, value, props) {
 
 export function deleteCookie(name) {
 	setCookie(name, null, { expires: -1 });
+}
+
+export function reportDay(date)  {
+	const day = `${getYear(date)}-${getMonth(date)+1}-${getDate(date)}`;
+	return day
+}
+export function reportTime (date) {
+	const time = `${getHours(date)}:${getMinutes(date)}:${getSeconds(date)}`;
+	return time
 }

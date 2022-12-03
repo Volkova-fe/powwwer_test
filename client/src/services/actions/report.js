@@ -13,7 +13,7 @@ export function getReport(date, id) {
 			.then((res) => {
 				dispatch({
 					type: GET_REPORT_SUCCESS,
-					tracker: res,
+					playload: res,
 				});
 			})
 			.catch(() => {
