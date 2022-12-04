@@ -28,8 +28,7 @@ class TrackerController {
 
 	async getAll(req, res, next) {
 		/*#swagger.tags = ['tracker']
-		#swagger.description = 'Get all tracks from base'
-	
+		#swagger.description = 'Get all tracks from base. Example id: "10" date: 2022-12-04'
 			#swagger.responses[400] = {
 				description: 'Invalid request data',
 				}

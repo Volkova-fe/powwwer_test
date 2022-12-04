@@ -195,7 +195,7 @@
         "tags": [
           "tracker"
         ],
-        "description": "Get all tracks from base",
+        "description": "Get all tracks from base. Example id: \"10\" date: 2022-12-04",
         "parameters": [
           {
             "name": "id",

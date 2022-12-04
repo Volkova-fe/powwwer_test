@@ -10,6 +10,6 @@ router.delete('/delete', userController.remove)
 
 
 
- router.get('/auth', authMiddleware, userController.check)
+router.get('/auth', authMiddleware, userController.check)
 
- module.exports = router
+module.exports = router

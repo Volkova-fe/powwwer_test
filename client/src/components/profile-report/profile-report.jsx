@@ -35,24 +35,24 @@ export const ProfileReport = () => {
 				type="primary"
 				size="small"
 			>
-				За период
+				По дате
 			</Button>
 		</div>
 	));
 
-	const onGetCurrentReport = useCallback(() => {
+	const onGetCurrentReport =() => {
 		dispatch(getUser())
 		dispatch(getReport(reportDay(currentDay), id))
 		setReportCurrDay(!reportCurrDay)
 		setReportSelectDay(false)
-	},[reportCurrDay])
+	}
 
-	const onChangeDate = useCallback((date) => {
+	const onChangeDate = (date) => {
 		setStartDate(date)
 		dispatch(getUser())
 		dispatch(getReport(reportDay(date), id))
 		setReportSelectDay(true)
-	}, [reportSelectDay])
+	}
 
 	registerLocale('ru', ru)
 
