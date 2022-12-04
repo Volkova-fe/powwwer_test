@@ -10,11 +10,9 @@ const persistConfig = {
 	storage,
 }
 
-
-
 const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'];
 const enhancer = composeEnhancers(applyMiddleware(thunk));
-
+//save data in local storage
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export let store = createStore(persistedReducer, enhancer)
 export let persistor = persistStore(store)
