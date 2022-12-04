@@ -1,5 +1,5 @@
 import React from 'react';
-import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import { legacy_createStore as createStore, applyMiddleware, compose } from 'redux';
 import { rootReducer } from './reducers/index';
 import thunk from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist'
@@ -10,7 +10,7 @@ const persistConfig = {
 	storage,
 }
 
-const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'];
+const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
 const enhancer = composeEnhancers(applyMiddleware(thunk));
 //save data in local storage
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -34,6 +34,7 @@ export const ProfileReport = () => {
 				extraClass={`${styles.btn} `}
 				type="primary"
 				size="small"
+				data-cy="reportSelectDay"
 			>
 				По дате
 			</Button>
@@ -72,6 +73,7 @@ export const ProfileReport = () => {
 							type="primary"
 							size="small"
 							onClick={onGetCurrentReport}
+							data-cy="clearReportCurrDay"
 						>
 							Скрыть отчет
 						</Button>)
@@ -81,6 +83,7 @@ export const ProfileReport = () => {
 							type="primary"
 							size="small"
 							onClick={onGetCurrentReport}
+							data-cy="reportCurrDay"
 						>
 							За день
 						</Button>)

@@ -34,6 +34,7 @@ export const Login = () => {
 				className={styles.form}
 				autoComplete="off"
 				onSubmit={onFormSubmit}
+				data-cy="form"
 			>
 				<div className="pb-6">
 					<EmailInput
@@ -41,6 +42,7 @@ export const Login = () => {
 						value={email}
 						name={'email'}
 						size="default"
+						data-cy="inputEmail"
 
 					/>
 				</div>
@@ -50,13 +52,15 @@ export const Login = () => {
 						value={password}
 						name={'password'}
 						size="default"
-
+						data-cy="inputPassword"
 					/>
 				</div>
 				<Button
 					htmlType="submit"
 					type="primary"
 					size="medium"
+					data-cy="login"
+					disabled={!email || !password}
 				>
 					Войти
 				</Button>

@@ -63,6 +63,7 @@ export const ProfileHeader = () => {
 							size="small"
 							onClick={onEndDay}
 							disabled={breakWork}
+							data-cy="endtDay"
 						>
 							Закончил
 						</Button>)
@@ -72,6 +73,7 @@ export const ProfileHeader = () => {
 							type="primary"
 							size="small"
 							onClick={onStartDay}
+							data-cy="startDay"
 						>
 							Начал
 						</Button>)
@@ -89,6 +91,7 @@ export const ProfileHeader = () => {
 							size="small"
 							onClick={onBreakEnd}
 							disabled={!start}
+							data-cy="breakEnd"
 						>
 							Перекур окончен
 						</Button>)
@@ -99,6 +102,7 @@ export const ProfileHeader = () => {
 							size="small"
 							onClick={onBreakStart}
 							disabled={!start}
+							data-cy="breakStart"
 						>
 							Ушёл курить
 						</Button>)
@@ -113,6 +117,7 @@ export const ProfileHeader = () => {
 					type="primary"
 					size="small"
 					disabled={start}
+					data-cy="removeUser"
 				>
 					<NavLink
 						to='/'
@@ -129,6 +134,7 @@ export const ProfileHeader = () => {
 					type="primary"
 					size="small"
 					disabled={start}
+					data-cy="logout"
 				>
 					<NavLink
 						to='/'

@@ -33,6 +33,7 @@ export const Register = () => {
 			<form
 				className={styles.form}
 				onSubmit={onFormSubmit}
+				data-cy="form"
 			>
 				<div className="pb-6">
 					<Input
@@ -43,6 +44,7 @@ export const Register = () => {
 						name={'name'}
 						error={false}
 						size={'default'}
+						data-cy="inputName"
 					/>
 				</div>
 				<div className="pb-6">
@@ -51,6 +53,7 @@ export const Register = () => {
 						value={email}
 						name={'email'}
 						size="default"
+						data-cy="inputEmail"
 
 					/>
 				</div>
@@ -60,12 +63,15 @@ export const Register = () => {
 						value={password}
 						name={'password'}
 						size="default"
+						data-cy="inputPassword"
 					/>
 				</div>
 				<Button
 					htmlType="submit"
 					type="primary"
 					size="medium"
+					data-cy="register"
+					disabled={!email || !password || !name}
 				>
 					Зарегистрироваться
 				</Button>

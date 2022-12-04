@@ -18,9 +18,10 @@ export const Profile = () => {
 
 	return (
 		<div className={`${styles.content}`}>
-			<ProfileHeader/>
+			<h1 className='text text_type_main-medium pl-5 pt-5'>Профиль учета рабочего времени</h1>
+			<ProfileHeader />
 			<div className={`${styles.container}`}>
-			<ProfileReport />
+				<ProfileReport />
 			</div >
 		</div >
 	)
