@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Тестирование компонента Login EmailInput без текста рендерится без ошибок 1`] = `
+exports[`Тестирование компонента Login EmailInput рендерится без ошибок 1`] = `
 <div
   className="input__container "
 >
@@ -9,7 +9,7 @@ exports[`Тестирование компонента Login EmailInput без �
     onClick={[Function]}
   >
     <label
-      className="input__placeholder text noselect text_type_main-default"
+      className="input__placeholder text noselect text_type_main-default input__placeholder-filled"
     >
       E-mail
     </label>
@@ -19,12 +19,13 @@ exports[`Тестирование компонента Login EmailInput без �
       onBlur={[Function]}
       onFocus={[Function]}
       type="email"
+      value="test"
     />
   </div>
 </div>
 `;
 
-exports[`Тестирование компонента Login PasswordInput без текста рендерится без ошибок 1`] = `
+exports[`Тестирование компонента Login PasswordInput рендерится без ошибок 1`] = `
 <div
   className="input__container "
 >
@@ -33,7 +34,7 @@ exports[`Тестирование компонента Login PasswordInput бе�
     onClick={[Function]}
   >
     <label
-      className="input__placeholder text noselect text_type_main-default"
+      className="input__placeholder text noselect text_type_main-default input__placeholder-filled"
     >
       Пароль
     </label>
@@ -43,6 +44,7 @@ exports[`Тестирование компонента Login PasswordInput бе�
       onBlur={[Function]}
       onFocus={[Function]}
       type="password"
+      value="test"
     />
     <div
       className="input__icon input__icon-action"
@@ -67,40 +69,32 @@ exports[`Тестирование компонента Login PasswordInput бе�
 exports[`Тестирование компонента Login Кнопка c типом secondary рендерится без ошибок 1`] = `
 <button
   className="button button_type_secondary button_size_medium"
+  type="button"
 />
 `;
 
 exports[`Тестирование компонента Login Кнопка size="large" рендерится без ошибок 1`] = `
 <button
   className="button button_type_primary button_size_large"
+  type="button"
 />
 `;
 
 exports[`Тестирование компонента Login Кнопка size="medium" рендерится без ошибок 1`] = `
 <button
   className="button button_type_primary button_size_medium"
+  type="button"
 />
 `;
 
 exports[`Тестирование компонента Login Кнопка size="small" рендерится без ошибок 1`] = `
 <button
   className="button button_type_primary button_size_small"
+  type="button"
 />
 `;
 
 exports[`Тестирование компонента Login Кнопка без текста рендерится без ошибок 1`] = `
-<button
-  className="button button_type_primary button_size_medium"
-/>
-`;
-
-exports[`Тестирование компонента Login Кнопка без текста рендерится без ошибок 2`] = `
-<button
-  className="button button_type_primary button_size_medium"
-/>
-`;
-
-exports[`Тестирование компонента Login Кнопка с htmlType="button" рендерится без ошибок 1`] = `
 <button
   className="button button_type_primary button_size_medium"
   type="button"
