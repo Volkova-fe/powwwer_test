@@ -1,30 +1,30 @@
-import React, { createRef, forwardRef, useCallback, useEffect, useState } from 'react';
+import React, { createRef, forwardRef, useState } from 'react';
 import styles from './profile-report.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getReport } from '../../services/actions/report';
 import { ReportElement } from '../report-element/report-element';
-import { currentDay } from '../../utils/constants';
+import { CURRENTDAY } from '../../utils/constants';
 import { reportDay } from '../../utils/utils';
-
+//Imports for Calendar
 import { startOfWeek, lastDayOfWeek } from 'date-fns'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import ru from 'date-fns/locale/ru';
-import { getReportRequest } from '../../API/report-api';
-import { getUser } from '../../services/actions/auth';
 
 export const ProfileReport = () => {
 	const dispatch = useDispatch();
 	const { report } = useSelector(state => state.report);
 	const { id } = useSelector(state => state.auth.user);
 
+//States for report 
 	const [startDate, setStartDate] = useState(new Date());
 	const [reportCurrDay, setReportCurrDay] = useState(false);
 	const [reportSelectDay, setReportSelectDay] = useState(false);
 	const ref = createRef();
 
+//Custom input for calendar, after click will open calendar anc can be change date for report
 	const CalendarInput = forwardRef(({ onClick }, ref) => (
 		<div ref={ref}>
 			<Button
@@ -41,19 +41,17 @@ export const ProfileReport = () => {
 	));
 
 	const onGetCurrentReport =() => {
-		dispatch(getUser())
-		dispatch(getReport(reportDay(currentDay), id))
+		dispatch(getReport(reportDay(CURRENTDAY), id))
 		setReportCurrDay(!reportCurrDay)
 		setReportSelectDay(false)
 	}
 
 	const onChangeDate = (date) => {
 		setStartDate(date)
-		dispatch(getUser())
 		dispatch(getReport(reportDay(date), id))
 		setReportSelectDay(true)
 	}
-
+//This changes the language from custom to specified
 	registerLocale('ru', ru)
 
 	return (
@@ -63,6 +61,10 @@ export const ProfileReport = () => {
 					Отчет
 				</p>
 				<div className={`${styles.btn_group}`}>
+				{/* Button rendering based on state, 
+				if reportCurrDay it will be change on Button 
+				with text Скрыть отчет, CalendarInput will be
+				disabled*/}
 					{reportCurrDay ? (
 						<Button
 							htmlType="button"
@@ -95,6 +97,7 @@ export const ProfileReport = () => {
 				</div>
 			</div>
 			<div>
+			{/* Rendering report elements */}
 				{report &&
 					(reportCurrDay || reportSelectDay) &&
 					report?.map((elem) => { return <ReportElement key={elem.id} item={elem} /> })}

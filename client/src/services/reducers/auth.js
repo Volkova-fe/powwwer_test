@@ -16,7 +16,7 @@ import {
 	REGISTER_FORM_REQUEST,
 	REGISTER_FORM_SET_VALUE,
 	REGISTER_FORM_SUCCESS,
-} from "../actions/auth";
+} from "../action-types/auth";
 
 
 const initialState = {

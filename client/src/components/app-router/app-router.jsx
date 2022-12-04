@@ -5,7 +5,7 @@ import { privateRoutes, publicRoutes } from '../../router';
 import { ProtectedRoute } from '../protected-route/protected-route';
 
 const AppRouter = () => {
-
+//route is divided into protected and available to all
 	return (
 		<Switch>
 			{publicRoutes.map(route =>

@@ -13,6 +13,7 @@ export const Register = () => {
 	const { email, password, name } = useSelector(state => state.auth.form);
 	const { auth } = useSelector(state => state.auth);
 
+	//put input value in store Auth
 	const onChange = e => {
 		dispatch(setRegisterFormValue(e.target.name, e.target.value));
 	}
@@ -21,7 +22,7 @@ export const Register = () => {
 		e.preventDefault();
 		dispatch(registerUser(email, password, name));
 	}
-
+	//Redirect user to Profile if auth true
 	if (auth) {
 		return (<Redirect to={location.state?.from || '/profile'} />);
 	}

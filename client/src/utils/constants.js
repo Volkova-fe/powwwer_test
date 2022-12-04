@@ -2,7 +2,7 @@
 
 export const BASE_URL = 'http://localhost:5002';
 
-export const actionType = {
+export const ACTIONTYPE = {
 	start: 'Начал',
 	breakStart: 'Ушёл курить',
 	breakEnd: 'Перекур окончен',
@@ -10,5 +10,5 @@ export const actionType = {
 	removeProfile: 'Удалил профиль'
 };
 
-export const currentDay = new Date();
+export const CURRENTDAY = new Date();
 

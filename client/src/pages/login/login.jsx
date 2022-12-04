@@ -13,15 +13,16 @@ export const Login = () => {
 	const { email, password } = useSelector(state => state.auth.form);
 	const { auth } = useSelector(state => state.auth);
 
+	//put input value in store Auth
 	const onChange = (e) => {
 		dispatch(setLoginFormValue(e.target.name, e.target.value));
 	}
-
+	//login request
 	const onFormSubmit = (e) => {
 		e.preventDefault();
 		dispatch(singIn(email, password));
 	}
-
+	//Redirect user to Profile if auth true
 	if (auth) {
 		return (<Redirect to={location.state?.from || '/profile'} />);
 	}

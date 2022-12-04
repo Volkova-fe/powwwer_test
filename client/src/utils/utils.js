@@ -33,11 +33,12 @@ export function setCookie(name, value, props) {
 export function deleteCookie(name) {
 	setCookie(name, null, { expires: -1 });
 }
-
+//Formatting the date as 2022-12-03
 export function reportDay(date)  {
 	const day = `${getYear(date)}-${getMonth(date)+1}-${getDate(date)}`;
 	return day
 }
+//Formatting the time as 2022-12-03
 export function reportTime (date) {
 	const time = `${getHours(date)}:${getMinutes(date)}:${getSeconds(date)}`;
 	return time

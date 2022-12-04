@@ -2,7 +2,7 @@ import {
 	GET_REPORT_REQUEST,
 	GET_REPORT_SUCCESS,
 	GET_REPORT_FAILED,
-} from "../actions/report";
+} from "../action-types/report";
 
 
 const initialState = {

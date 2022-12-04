@@ -11,7 +11,7 @@ export const Profile = () => {
 	const cookie = getCookie('token');
 	const { auth } = useSelector(state => state.auth);
 
-
+	//Redirect user to initial page login if delete cookie and auth false
 	if (!auth && !cookie) {
 		return <Redirect to="/" />
 	}

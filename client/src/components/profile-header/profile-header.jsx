@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import styles from './profile-header.module.css';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { trackerUser } from '../../API/report-api';
-import { actionType, currentDay } from '../../utils/constants';
+import { ACTIONTYPE, CURRENTDAY } from '../../utils/constants';
 import { NavLink } from 'react-router-dom';
 import { removeUser, singOut } from '../../services/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,26 +20,26 @@ export const ProfileHeader = () => {
 
 	const onStartDay = useCallback(() => {
 		setStart(!start);
-		trackerUser(actionType.start, reportTime(currentDay), reportDay(currentDay), id)
+		trackerUser(ACTIONTYPE.start, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
 	}, [start]);
 
 	const onEndDay = useCallback(() => {
-		trackerUser(actionType.end, reportTime(currentDay), reportDay(currentDay), id)
+		trackerUser(ACTIONTYPE.end, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
 		setStart(!start);
 	}, [start]);
 
 	const onBreakStart = useCallback(() => {
-		trackerUser(actionType.breakStart, reportTime(currentDay), reportDay(currentDay), id)
+		trackerUser(ACTIONTYPE.breakStart, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
 		setBreakWork(!breakWork);
 	}, [breakWork]);
 
 	const onBreakEnd = useCallback(() => {
-		trackerUser(actionType.breakEnd, reportTime(currentDay), reportDay(currentDay), id)
+		trackerUser(ACTIONTYPE.breakEnd, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
 		setBreakWork(!breakWork);
 	}, [breakWork]);
 
 	const onRemoveUser = useCallback(() => {
-		trackerUser(actionType.removeProfile, reportTime(currentDay), reportDay(currentDay), id)
+		trackerUser(ACTIONTYPE.removeProfile, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
 		dispatch(removeUser(email));
 	}, [cookie]);
 
@@ -50,6 +50,10 @@ export const ProfileHeader = () => {
 	return (
 		<div className={`${styles.header}`}>
 			<div className={`${styles.btn_group}`}>
+				{/* Button rendering based on state, 
+				if day start it will be change on Button 
+				with text Закончил, if state breake true 
+				it disabled*/}
 				{
 					start ? (
 						<Button
@@ -72,6 +76,10 @@ export const ProfileHeader = () => {
 							Начал
 						</Button>)
 				}
+				{/* Button rendering based on state, 
+				if day breake it will be change on Button 
+				with text Перекур окончен, if state start false 
+				it disabled*/}
 				{
 					breakWork ? (
 						<Button
@@ -97,6 +105,8 @@ export const ProfileHeader = () => {
 				}
 			</div>
 			<div className={`${styles.btn_group}`}>
+				{/* Button rendering based on state, 
+				if state start true it disabled*/}
 				<Button
 					htmlType="button"
 					extraClass={`${styles.btn} ml-5`}

@@ -1,8 +1,6 @@
 import { getReportRequest } from "../../API/report-api";
+import { GET_REPORT_FAILED, GET_REPORT_REQUEST, GET_REPORT_SUCCESS } from "../action-types/report";
 
-export const GET_REPORT_REQUEST = 'GET_REPORT_REQUEST';
-export const GET_REPORT_SUCCESS = 'GET_REPORT_SUCCESS';
-export const GET_REPORT_FAILED = 'GET_REPORT_FAILED';
 
 export function getReport(date, id) {
 	return function (dispatch) {
