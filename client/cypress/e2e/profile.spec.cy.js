@@ -69,7 +69,7 @@ describe('Correct operation registration page', () => {
 		cy.get(dataCyReportSelectDay).should('be.disabled')
 	})
 	it('Button report select day correctly', function () {
-		cy.get(dataCyReportSelectDay).should('be.disabled').click()
-		cy.get(dataCyReportCurrDay).should('be.disabled')
+		cy.get(dataCyReportCurrDay).should('be.not.disabled')
+		cy.contains('По дате').click()
 	})
 }); 
