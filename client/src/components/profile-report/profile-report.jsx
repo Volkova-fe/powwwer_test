@@ -99,7 +99,7 @@ export const ProfileReport = () => {
 					/>
 				</div>
 			</div>
-			<div>
+			<div className={styles.report_container}>
 			{/* Rendering report elements */}
 				{report &&
 					(reportCurrDay || reportSelectDay) &&
