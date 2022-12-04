@@ -80,7 +80,7 @@ class UserController {
 		return res.json({ email, token, id: user.id })
 	}
 
-	async logout(res, next) {
+	async logout(req, res, next) {
 		/*#swagger.tags = ['user']
 		#swagger.description = 'Logout user'
 		#swagger.parameters['Logout'] = { 
