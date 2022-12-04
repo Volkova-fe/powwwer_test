@@ -6,12 +6,11 @@ import { ACTIONTYPE, CURRENTDAY } from '../../utils/constants';
 import { NavLink } from 'react-router-dom';
 import { removeUser, singOut } from '../../services/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCookie, reportDay, reportTime } from '../../utils/utils';
+import { reportDay, reportTime } from '../../utils/utils';
 
 
 export const ProfileHeader = () => {
 	const dispatch = useDispatch();
-	const cookie = getCookie('token');
 
 	const [start, setStart] = useState(false)
 	const [breakWork, setBreakWork] = useState(false)
@@ -21,31 +20,31 @@ export const ProfileHeader = () => {
 	const onStartDay = useCallback(() => {
 		setStart(!start);
 		trackerUser(ACTIONTYPE.start, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
-	}, [start]);
+	}, [start, id]);
 
 	const onEndDay = useCallback(() => {
 		trackerUser(ACTIONTYPE.end, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
 		setStart(!start);
-	}, [start]);
+	}, [start, id]);
 
 	const onBreakStart = useCallback(() => {
 		trackerUser(ACTIONTYPE.breakStart, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
 		setBreakWork(!breakWork);
-	}, [breakWork]);
+	}, [breakWork, id]);
 
 	const onBreakEnd = useCallback(() => {
 		trackerUser(ACTIONTYPE.breakEnd, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
 		setBreakWork(!breakWork);
-	}, [breakWork]);
+	}, [breakWork, id]);
 
 	const onRemoveUser = useCallback(() => {
 		trackerUser(ACTIONTYPE.removeProfile, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
 		dispatch(removeUser(email));
-	}, [cookie]);
+	}, [id, dispatch, email]);
 
 	const onLogoutClick = useCallback(() => {
 		dispatch(singOut());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<div className={`${styles.header}`}>
