@@ -3,7 +3,7 @@ import { getCookie } from '../utils/utils';
 import { checkResponse } from './utils';
 
 
-export const trackerUser = async (type, time, date, id) => {
+export const trackerUserRequest = async (type, time, date, id) => {
 	return await fetch(`${BASE_URL}/api/tracker/action`, {
 		method: 'POST',
 		body: JSON.stringify({

@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react'
 import styles from './profile-header.module.css';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { trackerUser } from '../../API/report-api';
-import { ACTIONTYPE, CURRENTDAY } from '../../utils/constants';
+import { ACTIONTYPE } from '../../utils/constants';
 import { NavLink } from 'react-router-dom';
 import { removeUser, singOut } from '../../services/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { reportDay, reportTime } from '../../utils/utils';
+import { trackAction } from '../../services/actions/report';
 
 
 export const ProfileHeader = () => {
@@ -19,26 +19,46 @@ export const ProfileHeader = () => {
 
 	const onStartDay = useCallback(() => {
 		setStart(!start);
-		trackerUser(ACTIONTYPE.start, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
-	}, [start, id]);
+		dispatch(trackAction(
+			ACTIONTYPE.start,
+			reportTime(new Date()),
+			reportDay(new Date()), id)
+		)
+	}, [start, id, dispatch]);
 
 	const onEndDay = useCallback(() => {
-		trackerUser(ACTIONTYPE.end, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
+		dispatch(trackAction(
+			ACTIONTYPE.end,
+			reportTime(new Date()),
+			reportDay(new Date()), id)
+		)
 		setStart(!start);
-	}, [start, id]);
+	}, [start, id, dispatch]);
 
 	const onBreakStart = useCallback(() => {
-		trackerUser(ACTIONTYPE.breakStart, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
+		dispatch(trackAction(
+			ACTIONTYPE.breakStart,
+			reportTime(new Date()),
+			reportDay(new Date()), id)
+		)
 		setBreakWork(!breakWork);
-	}, [breakWork, id]);
+	}, [breakWork, id, dispatch]);
 
 	const onBreakEnd = useCallback(() => {
-		trackerUser(ACTIONTYPE.breakEnd, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
+		dispatch(trackAction(
+			ACTIONTYPE.breakEnd,
+			reportTime(new Date()),
+			reportDay(new Date()), id)
+		)
 		setBreakWork(!breakWork);
-	}, [breakWork, id]);
+	}, [breakWork, id, dispatch]);
 
 	const onRemoveUser = useCallback(() => {
-		trackerUser(ACTIONTYPE.removeProfile, reportTime(CURRENTDAY), reportDay(CURRENTDAY), id)
+		dispatch(trackAction(
+			ACTIONTYPE.removeProfile,
+			reportTime(new Date()),
+			reportDay(new Date()), id)
+		)
 		dispatch(removeUser(email));
 	}, [id, dispatch, email]);
 

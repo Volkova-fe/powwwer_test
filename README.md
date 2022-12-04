@@ -1,6 +1,6 @@
 ## Тестовое задание компании Powwwer
 
-<img src="demo/registration.png" width="500">
+<img src="demo/registration.png" width="400">
 
 ## Обзор
 **Система учёта времени сотрудников компании**
@@ -13,7 +13,7 @@
    - Получение списка действий. Используется в компоненте profile-report;
    - Добавление действий пользователя в компоненте profile-header;
 
-<img src="demo/profile.png" width="500">
+<img src="demo/profile.png" width="400">
 
 
 * React-Router
@@ -52,7 +52,7 @@ ___
 * nodemon
 ___
 
-<img src="demo/login.png" width="500">
+<img src="demo/login.png" width="400">
 
 ___
 ## Локальная установка и запуск server
