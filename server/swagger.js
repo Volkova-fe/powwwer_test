@@ -2,7 +2,7 @@ const swaggerAutogen = require('swagger-autogen')()
 
 const outputFile = './open-api-doc.json'
 const endpointsFiles = ['./routes/index.js']
-
+//create models for swagger doc api
 const doc = {
 	info: {
 		title: 'Work tracker API',
@@ -63,5 +63,5 @@ const doc = {
 	host: 'localhost:5002/api',
 	schemes: ['http']
 }
-
+//call func for generation swagger doc api
 swaggerAutogen(outputFile, endpointsFiles, doc)
