@@ -3,16 +3,16 @@ import { Redirect, Route, useLocation } from 'react-router-dom';
 
 
 //Protected Route using for private page
-export const ProtectedRoute = ({ children, ...rest }) => {
+export const ProtectedRoute = ({ component: Component, ...rest }) => {
 	const location = useLocation();
 	let cookie = true
 
 	return (
 		<Route
 			{...rest}
-			render={() =>
+			render={(props) =>
 				cookie ? (
-					children
+					<Component {...props} />
 				) : (
 					<Redirect
 						to={{
