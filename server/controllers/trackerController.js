@@ -1,5 +1,6 @@
 const { Tracker } = require('../models/models')
 const ApiError = require('../error/ApiError')
+const { Op } = require("sequelize");
 
 class TrackerController {
 	async create(req, res, next) {
@@ -26,9 +27,9 @@ class TrackerController {
 		return res.json({ message: 'success' })
 	}
 
-	async getAll(req, res, next) {
+	async getSelectDay(req, res, next) {
 		/*#swagger.tags = ['tracker']
-		#swagger.description = 'Get all tracks from base. Example id: "10" date: 2022-12-04'
+		#swagger.description = 'Get select day tracks from base. Example id: "10" date: 2022-12-04'
 			#swagger.responses[400] = {
 				description: 'Invalid request data',
 				}
@@ -45,6 +46,30 @@ class TrackerController {
 		}
 		return res.json(tracker)
 	}
+
+	async getRangeDate(req, res, next) {
+		/*#swagger.tags = ['tracker']
+		#swagger.description = 'Get range date tracks from base. Example id: "10" from: 2022-12-04, to: 2022-12-06'
+			#swagger.responses[400] = {
+				description: 'Invalid request data',
+				}
+		*/
+		let { from, to, id } = req.params
+		const tracker = await Tracker.findAll({
+			where: {
+				date: {
+					[Op.gte]: from,
+					[Op.lte]: to,
+				},
+				userId: id,
+			}
+		})
+		if (!tracker) {
+			return next(ApiError.badRequest('нет действий'))
+		}
+		return res.json(tracker)
+	}
 }
+
 
 module.exports = new TrackerController()

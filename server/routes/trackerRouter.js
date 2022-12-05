@@ -5,7 +5,7 @@ const trackerController = require('../controllers/trackerController')
 
 router.post('/action', trackerController.create)
 //get all tracker actions for report
-router.get('/:id/:date', trackerController.getAll)
-
+router.get('/:id/:date', trackerController.getSelectDay)
+router.get('/:id/:from/:to', trackerController.getRangeDate)
 
 module.exports = router

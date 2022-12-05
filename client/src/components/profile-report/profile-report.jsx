@@ -1,10 +1,9 @@
-import React, { createRef, forwardRef, useState } from 'react';
+import React, { createRef, forwardRef, useEffect, useState } from 'react';
 import styles from './profile-report.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getReport } from '../../services/actions/report';
+import { getRangeDaysReport, getSelectDayReport } from '../../services/actions/report';
 import { ReportElement } from '../report-element/report-element';
-import { CURRENTDAY } from '../../utils/constants';
 import { reportDay } from '../../utils/utils';
 //Imports for Calendar
 import { startOfWeek, lastDayOfWeek } from 'date-fns'
@@ -18,42 +17,65 @@ export const ProfileReport = () => {
 	const { report } = useSelector(state => state.report);
 	const { id } = useSelector(state => state.auth.user);
 
-//States for report 
+	//States for report 
 	const [startDate, setStartDate] = useState(new Date());
-	const [reportCurrDay, setReportCurrDay] = useState(false);
-	const [reportSelectDay, setReportSelectDay] = useState(false);
-	const ref = createRef();
 
-//Custom input for calendar, after click will open calendar anc can be change date for report
-	const CalendarInput = forwardRef(({ onClick }, ref) => (
+	const [reportSelectDay, setReportSelectDay] = useState(false);
+
+	const [dateRange, setDateRange] = useState([null, null]);
+	const [startRangeDate, endRangeDate] = dateRange;
+
+	const selectDayref = createRef();
+	const rangeDaysref = createRef();
+
+	//Custom input for report select day, after click will open calendar and you can change date for report
+	const SelectDayInput = forwardRef(({ onClick }, ref) => (
 		<div ref={ref}>
 			<Button
 				onClick={onClick}
-				disabled={reportCurrDay}
 				htmlType="button"
 				extraClass={`${styles.btn} `}
 				type="primary"
 				size="small"
 				data-cy="reportSelectDay"
 			>
-				По дате
+				За день
 			</Button>
 		</div>
 	));
 
-	const onGetCurrentReport =() => {
-		dispatch(getReport(reportDay(CURRENTDAY), id))
-		setReportCurrDay(!reportCurrDay)
-		setReportSelectDay(false)
-	}
+	//Custom input for report range day, after click will open calendar and you can change date for report
+	const RangeDaysInput = forwardRef(({ onClick }, ref) => (
+		<div ref={ref}>
+			<Button
+				onClick={onClick}
+				htmlType="button"
+				extraClass={`${styles.btn} `}
+				type="primary"
+				size="small"
+				data-cy="reportSelectDay"
+			>
+				За период
+			</Button>
+		</div>
+	));
 
-	const onChangeDate = (date) => {
+	//event handler for selecting the day of the report
+	const handleClickSelectDay = (date) => {
+		setDateRange([null, null])
 		setStartDate(date)
-		dispatch(getReport(reportDay(date), id))
+		dispatch(getSelectDayReport(reportDay(date), id))
 		setReportSelectDay(true)
 	}
-//This changes the language from custom to specified
+	//This changes the language from custom to specified
 	registerLocale('ru', ru)
+
+	//The report request for the interval will work only if the start and end dates are selected
+	useEffect(() => {
+		if (startRangeDate && endRangeDate) {
+			dispatch(getRangeDaysReport(reportDay(startRangeDate), reportDay(endRangeDate), id))
+		}
+	}, [endRangeDate, dispatch])
 
 	return (
 		<div className={`${styles.report}`}>
@@ -62,47 +84,35 @@ export const ProfileReport = () => {
 					Отчет
 				</p>
 				<div className={`${styles.btn_group}`}>
-				{/* Button rendering based on state, 
-				if reportCurrDay it will be change on Button 
-				with text Скрыть отчет, CalendarInput will be
-				disabled*/}
-					{reportCurrDay ? (
-						<Button
-							htmlType="button"
-							extraClass={`${styles.btn} mr-2`}
-							type="primary"
-							size="small"
-							onClick={onGetCurrentReport}
-							data-cy="clearReportCurrDay"
-						>
-							Скрыть отчет
-						</Button>)
-						: (<Button
-							htmlType="button"
-							extraClass={`${styles.btn} mr-2`}
-							type="primary"
-							size="small"
-							onClick={onGetCurrentReport}
-							data-cy="reportCurrDay"
-						>
-							За день
-						</Button>)
-					}
 					<DatePicker
 						locale='ru'
 						selected={startDate}
-						onChange={onChangeDate}
+						onChange={handleClickSelectDay}
 						withPortal
 						minDate={startOfWeek(startDate, { weekStartsOn: 1 })}
 						maxDate={lastDayOfWeek(startDate, { weekStartsOn: 1 })}
-						customInput={<CalendarInput ref={ref} />}
+						customInput={<SelectDayInput ref={selectDayref} />}
+					/>
+					<DatePicker
+						locale='ru'
+						selected={startDate}
+						startDate={startRangeDate}
+						endDate={endRangeDate}
+						onChange={(update) => {
+							setDateRange(update);
+						}}
+						withPortal
+						minDate={startOfWeek(startDate, { weekStartsOn: 1 })}
+						maxDate={lastDayOfWeek(startDate, { weekStartsOn: 1 })}
+						customInput={<RangeDaysInput ref={rangeDaysref} />}
+						selectsRange={true}
 					/>
 				</div>
 			</div>
 			<div className={styles.report_container}>
-			{/* Rendering report elements */}
+				{/* Rendering report elements */}
 				{report &&
-					(reportCurrDay || reportSelectDay) &&
+					(dateRange || reportSelectDay) &&
 					report?.map((elem) => { return <ReportElement key={elem.id} item={elem} /> })}
 			</div>
 		</div>

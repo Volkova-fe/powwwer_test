@@ -1,22 +1,52 @@
-import { getReportRequest, trackerUserRequest } from "../../API/report-api";
-import { GET_REPORT_FAILED, GET_REPORT_REQUEST, GET_REPORT_SUCCESS, TRACK_ACTION_FAILED, TRACK_ACTION_REQUEST, TRACK_ACTION_SUCCESS } from "../action-types/report";
+import { getRangeDaysReportRequest, getSelectDayReportRequest, trackerUserRequest } from "../../API/report-api";
+import { 
+	GET_RANGE_DAYS_REPORT_FAILED,
+	GET_RANGE_DAYS_REPORT_REQUEST,
+	GET_RANGE_DAYS_REPORT_SUCCESS,
+	GET_SELECT_DAY_REPORT_FAILED,
+	GET_SELECT_DAY_REPORT_REQUEST,
+	GET_SELECT_DAY_REPORT_SUCCESS,
+	TRACK_ACTION_FAILED, 
+	TRACK_ACTION_REQUEST, 
+	TRACK_ACTION_SUCCESS 
+} from "../action-types/report";
 
 
-export function getReport(date, id) {
+export function getSelectDayReport(date, id) {
 	return function (dispatch) {
 		dispatch({
-			type: GET_REPORT_REQUEST,
+			type: GET_SELECT_DAY_REPORT_REQUEST,
 		});
-		getReportRequest(date, id)
+		getSelectDayReportRequest(date, id)
 			.then((res) => {
 				dispatch({
-					type: GET_REPORT_SUCCESS,
+					type: GET_SELECT_DAY_REPORT_SUCCESS,
 					playload: res,
 				});
 			})
 			.catch(() => {
 				dispatch({
-					type: GET_REPORT_FAILED,
+					type: GET_SELECT_DAY_REPORT_FAILED,
+				});
+			})
+	};
+}
+
+export function getRangeDaysReport(from, to, id) {
+	return function (dispatch) {
+		dispatch({
+			type: GET_RANGE_DAYS_REPORT_REQUEST,
+		});
+		getRangeDaysReportRequest(from, to, id)
+			.then((res) => {
+				dispatch({
+					type: GET_RANGE_DAYS_REPORT_SUCCESS,
+					playload: res,
+				});
+			})
+			.catch(() => {
+				dispatch({
+					type: GET_RANGE_DAYS_REPORT_FAILED,
 				});
 			})
 	};

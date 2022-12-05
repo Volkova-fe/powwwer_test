@@ -19,8 +19,19 @@ export const trackerUserRequest = async (type, time, date, id) => {
 		.then(res => checkResponse(res));
 }
 
-export const getReportRequest = async (date, id) => {
+export const getSelectDayReportRequest = async (date, id) => {
 	return await fetch(`${BASE_URL}/api/tracker/${id}/${date}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + getCookie('token')
+		},
+	})
+		.then(res => checkResponse(res));
+}
+
+export const getRangeDaysReportRequest = async (from, to, id) => {
+	return await fetch(`${BASE_URL}/api/tracker/${id}/${from}/${to}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',

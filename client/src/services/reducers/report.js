@@ -1,10 +1,13 @@
 import {
-	GET_REPORT_REQUEST,
-	GET_REPORT_SUCCESS,
-	GET_REPORT_FAILED,
 	TRACK_ACTION_FAILED,
 	TRACK_ACTION_SUCCESS,
 	TRACK_ACTION_REQUEST,
+	GET_SELECT_DAY_REPORT_REQUEST,
+	GET_SELECT_DAY_REPORT_FAILED,
+	GET_SELECT_DAY_REPORT_SUCCESS,
+	GET_RANGE_DAYS_REPORT_REQUEST,
+	GET_RANGE_DAYS_REPORT_SUCCESS,
+	GET_RANGE_DAYS_REPORT_FAILED,
 } from "../action-types/report";
 
 
@@ -17,21 +20,43 @@ const initialState = {
 
 export const reportReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case GET_REPORT_REQUEST: {
+		case GET_SELECT_DAY_REPORT_REQUEST: {
 			return {
 				...state,
 				getReportFailed: false,
 				getReportRequest: true,
 			};
 		}
-		case GET_REPORT_FAILED: {
+		case GET_SELECT_DAY_REPORT_FAILED: {
 			return {
 				...state,
 				getReportFailed: true,
 				getReportRequest: false,
 			};
 		}
-		case GET_REPORT_SUCCESS: {
+		case GET_SELECT_DAY_REPORT_SUCCESS: {
+			return {
+				state,
+				report: action.playload,
+				getReportRequest: false,
+				getReportFailed: false,
+			};
+		}
+		case GET_RANGE_DAYS_REPORT_REQUEST: {
+			return {
+				...state,
+				getReportFailed: false,
+				getReportRequest: true,
+			};
+		}
+		case GET_RANGE_DAYS_REPORT_FAILED: {
+			return {
+				...state,
+				getReportFailed: true,
+				getReportRequest: false,
+			};
+		}
+		case GET_RANGE_DAYS_REPORT_SUCCESS: {
 			return {
 				state,
 				report: action.playload,
