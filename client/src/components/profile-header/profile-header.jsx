@@ -63,6 +63,11 @@ export const ProfileHeader = () => {
 	}, [id, dispatch, email]);
 
 	const onLogoutClick = useCallback(() => {
+		dispatch(trackAction(
+			ACTIONTYPE.logout,
+			reportTime(new Date()),
+			reportDay(new Date()), id)
+		)
 		dispatch(singOut());
 	}, [dispatch]);
 

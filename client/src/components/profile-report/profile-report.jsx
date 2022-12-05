@@ -118,8 +118,7 @@ export const ProfileReport = () => {
 			</div>
 			<div className={styles.report_container}>
 				{/* Rendering report elements */}
-				{report &&
-					(dateRange || reportSelectDay) &&
+				{(dateRange || reportSelectDay) &&
 					report?.map((elem) => { return <ReportElement key={elem.id} item={elem} /> })}
 			</div>
 		</div>

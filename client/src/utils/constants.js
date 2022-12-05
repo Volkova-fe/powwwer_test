@@ -5,8 +5,8 @@ export const ACTIONTYPE = {
 	breakStart: 'Ушёл курить',
 	breakEnd: 'Перекур окончен',
 	end: 'Закончил',
+	logout: 'Вышел из системы',
 	removeProfile: 'Удалил профиль'
 };
 
-export const CURRENTDAY = new Date();
 

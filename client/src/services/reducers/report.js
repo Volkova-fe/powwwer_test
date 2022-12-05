@@ -37,7 +37,10 @@ export const reportReducer = (state = initialState, action) => {
 		case GET_SELECT_DAY_REPORT_SUCCESS: {
 			return {
 				state,
-				report: action.playload,
+				report: action.playload.slice().sort(
+					(a,b) => a.id > b.id ? 1 : -1
+
+				),
 				getReportRequest: false,
 				getReportFailed: false,
 			};
@@ -59,7 +62,10 @@ export const reportReducer = (state = initialState, action) => {
 		case GET_RANGE_DAYS_REPORT_SUCCESS: {
 			return {
 				state,
-				report: action.playload,
+				report: action.playload.slice().sort(
+					(a,b) => a.id > b.id ? 1 : -1
+
+				),
 				getReportRequest: false,
 				getReportFailed: false,
 			};
