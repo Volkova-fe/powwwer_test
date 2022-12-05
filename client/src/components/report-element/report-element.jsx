@@ -7,9 +7,9 @@ export const ReportElement = ({ item }) => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.report_elements}>
-				<p className="text text_type_main-default">{date} </p>
-				<p className="text text_type_main-default">{time} </p>
-				<p className="text text_type_main-default"> {type} </p>
+				<p className="text text_type_main-small">{date} </p>
+				<p className="text text_type_main-small">{time} </p>
+				<p className="text text_type_main-small"> {type} </p>
 			</div>
 		</div>
 	)
