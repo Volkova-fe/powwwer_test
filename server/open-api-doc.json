@@ -195,7 +195,7 @@
         "tags": [
           "tracker"
         ],
-        "description": "Get all tracks from base. Example id: \"10\" date: 2022-12-04",
+        "description": "Get select day tracks from base. Example id: \"10\" date: 2022-12-04",
         "parameters": [
           {
             "name": "id",
@@ -205,6 +205,42 @@
           },
           {
             "name": "date",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid request data"
+          }
+        }
+      }
+    },
+    "/tracker/{id}/{from}/{to}": {
+      "get": {
+        "tags": [
+          "tracker"
+        ],
+        "description": "Get range date tracks from base. Example id: \"10\" from: 2022-12-04, to: 2022-12-06",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "to",
             "in": "path",
             "required": true,
             "type": "string"
@@ -373,7 +409,7 @@
         }
       }
     },
-    "TrackerBase": {
+    "TrackerSelectDay": {
       "type": "object",
       "properties": {
         "id": {
@@ -383,6 +419,23 @@
         "date": {
           "type": "string",
           "example": "2022-12-02"
+        }
+      }
+    },
+    "TrackerRangeDays": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1"
+        },
+        "from": {
+          "type": "string",
+          "example": "2022-12-02"
+        },
+        "to": {
+          "type": "string",
+          "example": "2022-12-05"
         }
       }
     }

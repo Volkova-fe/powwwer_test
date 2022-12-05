@@ -55,9 +55,14 @@ const doc = {
 		TrackerCreateSuccess: {
 			message: 'success'
 		},
-		TrackerBase: {
+		TrackerSelectDay: {
 			id: '1',
 			date: '2022-12-02',
+		},
+		TrackerRangeDays: {
+			id: '1',
+			from: '2022-12-02',
+			to: '2022-12-05',
 		},
 	},
 	host: 'localhost:5002/api',
