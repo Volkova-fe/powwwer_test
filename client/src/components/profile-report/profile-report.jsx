@@ -86,11 +86,15 @@ export const ProfileReport = () => {
 				<div className={`${styles.btn_group}`}>
 					<DatePicker
 						locale='ru'
+						//default date
 						selected={startDate}
 						onChange={handleClickSelectDay}
+						//opens the calendar in a modal
 						withPortal
+						//shows available period
 						minDate={startOfWeek(startDate, { weekStartsOn: 1 })}
 						maxDate={lastDayOfWeek(startDate, { weekStartsOn: 1 })}
+						//render calendar input on profile page
 						customInput={<SelectDayInput ref={selectDayref} />}
 					/>
 					<DatePicker
