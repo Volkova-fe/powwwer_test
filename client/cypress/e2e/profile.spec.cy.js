@@ -65,10 +65,10 @@ describe('Correct operation registration page', () => {
 		cy.get(dataCyRemoveUser).should('be.disabled')
 	})
 	it('Button report select day correctly', function () {
-		cy.get(dataCyReportSelectDay).should('be.not.disabled').click()
+		cy.get(dataCyReportSelectDay).should('be.not.disabled').click({force:true})
 
 	})
 	it('Button report range day correctly', function () {
-		cy.get(dataCyReportRangeDay).should('be.not.disabled').click()
+		cy.get(dataCyReportRangeDay).should('be.not.disabled').click({force:true})
 	})
 }); 
