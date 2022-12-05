@@ -39,7 +39,7 @@ describe('Correct operation login page', () => {
 	it('Success login', function () {
 		cy.get(dataCyForm)
 			.within(() => {
-				cy.get(dataCyInputEmail).type('hello1@ya.ru')
+				cy.get(dataCyInputEmail).type('hello123@ya.ru')
 				cy.get(dataCyInputPassword).type('hello123')
 				cy.get(dataCyLogin).should('be.not.disabled').click()
 				cy.visit('/profile')

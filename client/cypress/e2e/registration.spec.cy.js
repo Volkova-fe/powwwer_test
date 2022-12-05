@@ -53,7 +53,7 @@ describe('Correct operation registration page', () => {
 		cy.get(dataCyForm)
 			.within(() => {
 				cy.get(dataCyInputName).type('Maria')
-				cy.get(dataCyInputEmail).type('hello1@ya.ru')
+				cy.get(dataCyInputEmail).type('hello123@ya.ru')
 				cy.get(dataCyInputPassword).type('hello123')
 				cy.get(dataCyRegister).should('be.not.disabled').click()
 				cy.visit('/profile')

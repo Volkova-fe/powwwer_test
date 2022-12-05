@@ -18,7 +18,7 @@ describe('Correct operation registration page', () => {
 		cy.visit(`/`)
 		cy.get(dataCyForm)
 		.within(() => {
-			cy.get(dataCyInputEmail).type('hello1@ya.ru')
+			cy.get(dataCyInputEmail).type('hello123@ya.ru')
 			cy.get(dataCyInputPassword).type('hello123')
 			cy.get(dataCyLogin).should('be.not.disabled').click()
 			cy.visit('/profile')
@@ -65,13 +65,10 @@ describe('Correct operation registration page', () => {
 		cy.get(dataCyRemoveUser).should('be.disabled')
 	})
 	it('Button report select day correctly', function () {
-		cy.get(dataCyReportRangeDay).should('be.not.disabled')
 		cy.get(dataCyReportSelectDay).should('be.not.disabled').click()
 
 	})
 	it('Button report range day correctly', function () {
-		cy.get(dataCyReportSelectDay).should('be.not.disabled')
-		cy.get(dataCyReportRangeDay).should('be.not.disabled')
-		cy.contains('За период').click()
+		cy.get(dataCyReportRangeDay).should('be.not.disabled').click()
 	})
 }); 
