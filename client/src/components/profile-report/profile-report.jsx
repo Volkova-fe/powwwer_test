@@ -75,7 +75,7 @@ export const ProfileReport = () => {
 		if (startRangeDate && endRangeDate) {
 			dispatch(getRangeDaysReport(reportDay(startRangeDate), reportDay(endRangeDate), id))
 		}
-	}, [endRangeDate, dispatch])
+	}, [endRangeDate, startRangeDate, id, dispatch])
 
 	return (
 		<div className={`${styles.report}`}>
