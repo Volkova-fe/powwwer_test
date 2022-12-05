@@ -53,7 +53,7 @@ export const ProfileReport = () => {
 				extraClass={`${styles.btn} `}
 				type="primary"
 				size="small"
-				data-cy="reportSelectDay"
+				data-cy="reportRangeDay"
 			>
 				За период
 			</Button>
@@ -67,6 +67,11 @@ export const ProfileReport = () => {
 		dispatch(getSelectDayReport(reportDay(date), id))
 		setReportSelectDay(true)
 	}
+
+	const handleClickRangeDays = (update) => {
+		setDateRange(update);
+	}
+
 	//This changes the language from custom to specified
 	registerLocale('ru', ru)
 
@@ -102,9 +107,7 @@ export const ProfileReport = () => {
 						selected={startDate}
 						startDate={startRangeDate}
 						endDate={endRangeDate}
-						onChange={(update) => {
-							setDateRange(update);
-						}}
+						onChange={handleClickRangeDays}
 						withPortal
 						minDate={startOfWeek(startDate, { weekStartsOn: 1 })}
 						maxDate={lastDayOfWeek(startDate, { weekStartsOn: 1 })}

@@ -8,7 +8,7 @@ import {
 	dataCyLogin, 
 	dataCyLogout, 
 	dataCyRemoveUser, 
-	dataCyReportCurrDay, 
+	dataCyReportRangeDay, 
 	dataCyReportSelectDay, 
 	dataCyStartDay 
 } from "../constants";
@@ -28,8 +28,8 @@ describe('Correct operation registration page', () => {
 	it('Button start day working correctly', function () {
 		cy.get(dataCyStartDay).click().should('have.text', 'Закончил')
 		cy.get(dataCyBreakStart).should('be.not.disabled')
-		cy.get(dataCyReportCurrDay).should('be.not.disabled')
 		cy.get(dataCyReportSelectDay).should('be.not.disabled')
+		cy.get(dataCyReportRangeDay).should('be.not.disabled')
 		cy.get(dataCyLogout).should('be.disabled')
 		cy.get(dataCyRemoveUser).should('be.disabled')
 	})
@@ -38,8 +38,8 @@ describe('Correct operation registration page', () => {
 		cy.get(dataCyStartDay).click().should('have.text', 'Закончил')
 		cy.get(dataCyEndDay).click().should('have.text', 'Начал')
 		cy.get(dataCyBreakStart).should('be.disabled')
-		cy.get(dataCyReportCurrDay).should('be.not.disabled')
 		cy.get(dataCyReportSelectDay).should('be.not.disabled')
+		cy.get(dataCyReportRangeDay).should('be.not.disabled')
 		cy.get(dataCyLogout).should('be.not.disabled')
 		cy.get(dataCyRemoveUser).should('be.not.disabled')
 	})
@@ -48,8 +48,8 @@ describe('Correct operation registration page', () => {
 		cy.get(dataCyStartDay).click().should('have.text', 'Закончил')
 		cy.get(dataCyBreakStart).should('be.not.disabled').click()
 		cy.get(dataCyEndDay).should('be.disabled')
-		cy.get(dataCyReportCurrDay).should('be.not.disabled')
 		cy.get(dataCyReportSelectDay).should('be.not.disabled')
+		cy.get(dataCyReportRangeDay).should('be.not.disabled')
 		cy.get(dataCyLogout).should('be.disabled')
 		cy.get(dataCyRemoveUser).should('be.disabled')
 	})
@@ -59,17 +59,19 @@ describe('Correct operation registration page', () => {
 		cy.get(dataCyBreakStart).should('be.not.disabled').click()
 		cy.get(dataCyBreakEnd).should('be.not.disabled').click()
 		cy.get(dataCyEndDay).should('be.not.disabled')
-		cy.get(dataCyReportCurrDay).should('be.not.disabled')
 		cy.get(dataCyReportSelectDay).should('be.not.disabled')
+		cy.get(dataCyReportRangeDay).should('be.not.disabled')
 		cy.get(dataCyLogout).should('be.disabled')
 		cy.get(dataCyRemoveUser).should('be.disabled')
 	})
-	it('Button report current day correctly', function () {
-		cy.get(dataCyReportCurrDay).should('be.not.disabled').click()
-		cy.get(dataCyReportSelectDay).should('be.disabled')
-	})
 	it('Button report select day correctly', function () {
-		cy.get(dataCyReportCurrDay).should('be.not.disabled')
-		cy.contains('По дате').click()
+		cy.get(dataCyReportRangeDay).should('be.not.disabled')
+		cy.get(dataCyReportSelectDay).should('be.not.disabled').click()
+
+	})
+	it('Button report range day correctly', function () {
+		cy.get(dataCyReportSelectDay).should('be.not.disabled')
+		cy.get(dataCyReportRangeDay).should('be.not.disabled')
+		cy.contains('За период').click()
 	})
 }); 
