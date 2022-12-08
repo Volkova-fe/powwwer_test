@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { removeUser, singOut } from '../../services/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { reportDay, reportTime } from '../../utils/utils';
-import { trackAction } from '../../services/actions/report';
+import { trackAction } from '../../services/actions/trackActions';
 
 
 export const ProfileHeader = () => {
@@ -69,7 +69,7 @@ export const ProfileHeader = () => {
 			reportDay(new Date()), id)
 		)
 		dispatch(singOut());
-	}, [dispatch]);
+	}, [dispatch, id]);
 
 	return (
 		<div className={`${styles.header}`}>

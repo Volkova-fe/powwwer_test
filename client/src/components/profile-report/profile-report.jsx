@@ -2,7 +2,7 @@ import React, { createRef, forwardRef, useEffect, useState } from 'react';
 import styles from './profile-report.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getRangeDaysReport, getSelectDayReport } from '../../services/actions/report';
+import { getRangeDaysReport, getSelectDayReport } from '../../services/actions/reportActions';
 import { ReportElement } from '../report-element/report-element';
 import { reportDay } from '../../utils/utils';
 //Imports for Calendar

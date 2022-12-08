@@ -49,9 +49,6 @@ const initialState = {
 	removeRequest: false,
 	removeFailed: false,
 
-	updateupdateTokenRequest: false,
-	updateupdateTokenSuccess: false,
-	updateupdateTokenFailed: false,
 };
 
 export const authReducer = (state = initialState, action) => {
