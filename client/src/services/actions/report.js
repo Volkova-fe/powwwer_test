@@ -52,12 +52,12 @@ export function getRangeDaysReport(from, to, id) {
 	};
 }
 
-export function trackAction(type, time, date, id) {
+export function trackAction(type, time, date) {
 	return function (dispatch) {
 		dispatch({
 			type: TRACK_ACTION_REQUEST,
 		});
-		trackerUserRequest(type, time, date, id)
+		trackerUserRequest(type, time, date)
 			.then((res) => {
 				dispatch({
 					type: TRACK_ACTION_SUCCESS,

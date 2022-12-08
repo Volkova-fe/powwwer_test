@@ -1,6 +1,15 @@
 const { Tracker } = require('../models/models')
 const ApiError = require('../error/ApiError')
 const { Op } = require("sequelize");
+const jwt = require('jsonwebtoken')
+
+const generateJwt = (id, email, role, name) => {
+	return jwt.sign(
+		{ id, email, role, name },
+		process.env.SECRET_KEY,
+		{ expiresIn: '24h' }
+	)
+}
 
 class TrackerController {
 	async create(req, res, next) {
@@ -19,8 +28,9 @@ class TrackerController {
 				description: 'Invalid request data',
 				}
 		*/
-		const { type, time, date, id } = req.body
-		const tracker = await Tracker.create({ type, time, date, userId: id })
+		const { type, time, date } = req.body
+		const token = generateJwt(req.user.id, req.user.email, req.user.role, req.user.name)
+		const tracker = await Tracker.create({ type, time, date, userId: req.user.id })
 		if (!tracker) {
 			return next(ApiError.badRequest('не корректное действие'))
 		}
@@ -34,11 +44,12 @@ class TrackerController {
 				description: 'Invalid request data',
 				}
 		*/
-		let { date, id } = req.params
+		let { date } = req.params
+		const token = generateJwt(req.user.id, req.user.email, req.user.role, req.user.name)
 		const tracker = await Tracker.findAll({
 			where: {
 				date: date,
-				userId: id,
+				userId: req.user.id,
 			}
 		})
 		if (!tracker) {
@@ -54,14 +65,15 @@ class TrackerController {
 				description: 'Invalid request data',
 				}
 		*/
-		let { from, to, id } = req.params
+		let { from, to} = req.params
+		const token = generateJwt(req.user.id, req.user.email, req.user.role, req.user.name)
 		const tracker = await Tracker.findAll({
 			where: {
 				date: {
 					[Op.gte]: from,
 					[Op.lte]: to,
 				},
-				userId: id,
+				userId: req.user.id,
 			}
 		})
 		if (!tracker) {
