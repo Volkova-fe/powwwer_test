@@ -7,11 +7,11 @@ const reportSlice = createSlice({
 		reportRequest: {
 			error: false,
 			submitting: false,
-		}, 
+		},
 		message: null
 	},
 	reducers: {
-		getRequest: state => {state.reportRequest.submitting = true},
+		getRequest: state => { state.reportRequest.submitting = true },
 		rangeDaysReport(state, action) {
 			state.report = action.payload.slice().sort(
 				(a, b) => a.id > b.id ? 1 : -1
@@ -24,7 +24,7 @@ const reportSlice = createSlice({
 			);
 			state.reportRequest.submitting = false;
 		},
-		requestFaied: (state) => { 
+		requestFaied: (state) => {
 			state.reportRequest.submitting = false;
 			state.reportRequest.error = true;
 		}
@@ -32,7 +32,7 @@ const reportSlice = createSlice({
 })
 
 export default reportSlice.reducer
-export const { 
+export const {
 	getRequest,
 	rangeDaysReport,
 	selectDayReport,

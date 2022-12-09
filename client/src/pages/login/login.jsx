@@ -2,7 +2,7 @@ import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setLoginFormValue, singIn } from '../../services/actions/auth';
+import { setLoginFormValue, singIn } from '../../services/actions/authActions';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import styles from './login.module.css';
 

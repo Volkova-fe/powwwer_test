@@ -6,16 +6,16 @@ const trackSlice = createSlice({
 		trackRequest: {
 			error: false,
 			submitting: false,
-		}, 
+		},
 		message: null
 	},
 	reducers: {
-		getRequest: state => {state.trackRequest.submitting = true},
-		postTrackAction(state, action) { 
+		getRequest: state => { state.trackRequest.submitting = true },
+		postTrackAction(state, action) {
 			state.message = action.payload
 			state.trackRequest.submitting = false;
 		},
-		requestFaied: (state) => { 
+		requestFaied: (state) => {
 			state.trackRequest.submitting = false;
 			state.trackRequest.error = true;
 		}
@@ -23,7 +23,7 @@ const trackSlice = createSlice({
 })
 
 export default trackSlice.reducer
-export const { 
+export const {
 	getRequest,
 	postTrackAction,
 	requestFaied

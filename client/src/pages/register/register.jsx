@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Link, Redirect, useLocation } from 'react-router-dom';
-import { registerUser, setRegisterFormValue } from '../../services/actions/auth';
+import { registerUser, setRegisterFormValue } from '../../services/actions/authActions';
 import styles from './register.module.css';
 
 

@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { authReducer } from "./auth";
+import authSlice from "./auth";
 import reportSlice from "./report";
 import trackSlice from "./track";
 
 
 export const rootReducer = combineReducers({
-	auth: authReducer,
+	auth: authSlice,
 	report: reportSlice,
 	track: trackSlice,
 });

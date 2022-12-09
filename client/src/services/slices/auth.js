@@ -1,207 +1,142 @@
-import {
-	REMOVE_USER_FAILED,
-	REMOVE_USER_REQUEST,
-	REMOVE_USER_SUCCESS,
-	GET_USER_FAILED,
-	GET_USER_REQUEST,
-	GET_USER_SUCCESS,
-	LOGIN_FORM_FAILED,
-	LOGIN_FORM_REQUEST,
-	LOGIN_FORM_SET_VALUE,
-	LOGIN_FORM_SUCCESS,
-	LOGOUT_FORM_FAILED,
-	LOGOUT_FORM_REQUEST,
-	LOGOUT_FORM_SUCCESS,
-	REGISTER_FORM_FAILED,
-	REGISTER_FORM_REQUEST,
-	REGISTER_FORM_SET_VALUE,
-	REGISTER_FORM_SUCCESS,
-} from "../action-types/auth";
+import { createSlice } from "@reduxjs/toolkit";
 
-
-const initialState = {
-	auth: false,
-	form: {
-		email: '',
-		password: '',
-		code: '',
-		name: ''
+const authSlice = createSlice({
+	name: "auth",
+	initialState: {
+		auth: false,
+		form: {
+			email: '',
+			password: '',
+			code: '',
+			name: ''
+		},
+		user: {
+			id: '',
+			email: '',
+			name: '',
+			token: '',
+		},
+		message: null,
+		loginRequest: {
+			error: false,
+			submitting: false,
+		},
+		registrationRequest: {
+			error: false,
+			submitting: false,
+		},
+		logoutRequest: {
+			error: false,
+			submitting: false,
+		},
+		userRequest: {
+			error: false,
+			submitting: false,
+		},
+		removeRequest: {
+			error: false,
+			submitting: false,
+		}
 	},
-
-	user: {
-		id: '',
-		email: '',
-		name: '',
-		token: '',
-	},
-
-	loginRequest: false,
-	loginFailed: false,
-	loginSuccess: false,
-
-	logoutRequest: false,
-	logoutSuccess: false,
-	logoutFailed: false,
-
-	getUserRequest: false,
-	getUserFailed: false,
-
-	removeRequest: false,
-	removeFailed: false,
-
-};
-
-export const authReducer = (state = initialState, action) => {
-	switch (action.type) {
-		case GET_USER_REQUEST: {
-			return {
-				...state,
-				getUserFailed: false,
-				getUserRequest: true,
-			};
-		}
-		case GET_USER_FAILED: {
-			return {
-				...state,
-				getUserFailed: true,
-				getUserRequest: false,
-			};
-		}
-		case GET_USER_SUCCESS: {
-			return {
-				...state,
-				auth: true,
-				user: action.playload,
-				getUserRequest: false,
-				getUserFailed: false,
-			};
-		}
-		case REMOVE_USER_REQUEST: {
-			return {
-				...state,
-				removeFailed: false,
-				removeRequest: true,
-			};
-		}
-		case REMOVE_USER_FAILED: {
-			return {
-				...state,
-				removeFailed: true,
-				removeRequest: false,
-			};
-		}
-		case REMOVE_USER_SUCCESS: {
-			return initialState;
-		}
-		case LOGIN_FORM_SET_VALUE: {
-			return {
-				...state,
-				form: {
-					...state.form,
-					[action.field]: action.value
-				}
-			};
-		}
-		case LOGIN_FORM_REQUEST: {
-			return {
-				...state,
-				loginFailed: false,
-				loginRequest: true
-			};
-		}
-		case LOGIN_FORM_FAILED: {
-			return {
-				...state,
-				loginFailed: true,
-				loginRequest: false
-			};
-		}
-		case LOGIN_FORM_SUCCESS: {
-			return {
-				...state,
-				user: action.playload,
-				form: {
-					...state.form,
-					email: '',
-					password: '',
-				},
-				auth: true,
-				loginRequest: false,
-				loginFailed: false,
-				loginSuccess: true,
-			};
-		}
-		case LOGOUT_FORM_REQUEST: {
-			return {
-				...state,
-				logoutFailed: false,
-				logoutRequest: true
-			};
-		}
-		case LOGOUT_FORM_FAILED: {
-			return {
-				...state,
-				logoutFailed: true,
-				logoutRequest: false
-			};
-		}
-		case LOGOUT_FORM_SUCCESS: {
-			return {
-				...state,
-				user: {
-					...state.user,
-					email: '',
-					name: '',
-					token: '',
-					id: ''
-				},
-				auth: false,
-				logoutSuccess: true,
-				logoutFailed: false,
-				logoutRequest: false
+	reducers: {
+		setFormValue(state, action) {
+			const { field, value } = action.payload;
+			state.form[field] = value;
+		},
+		singInRequest: state => {
+			state.auth = false
+			state.loginRequest.submitting = true
+		},
+		singInSuccess(state, action) {
+			state.auth = true
+			state.user = action.payload
+			state.loginRequest.submitting = false;
+			state.form = {
+				email: '',
+				password: '',
+				code: '',
+				name: ''
 			}
-		}
-		case REGISTER_FORM_SET_VALUE: {
-			return {
-				...state,
-				form: {
-					...state.form,
-					[action.field]: action.value
-				}
-			};
-		}
-		case REGISTER_FORM_REQUEST: {
-			return {
-				...state,
-				loginFailed: false,
-				loginRequest: true
-			};
-		}
-		case REGISTER_FORM_FAILED: {
-			return {
-				...state,
-				loginFailed: true,
-				loginRequest: false
-			};
-		}
-		case REGISTER_FORM_SUCCESS: {
-			return {
-				...state,
-				user: action.playload,
-				form: {
-					...state.form,
-					email: '',
-					password: '',
-					name: ''
-				},
-				auth: true,
-				loginRequest: false,
-				loginFailed: false,
-				loginSuccess: true,
-			};
-		}
-		default: {
-			return state;
-		}
+		},
+		singInFaied: (state) => {
+			state.auth = false
+			state.loginRequest.submitting = false;
+			state.loginRequest.error = true;
+		},
+		registrationRequest: state => {
+			state.auth = false
+			state.registrationRequest.submitting = true
+		},
+		registrationSuccess(state, action) {
+			state.auth = true
+			state.user = action.payload
+			state.registrationRequest.submitting = false;
+		},
+		registrationFaied: (state) => {
+			state.auth = false
+			state.registrationRequest.submitting = false;
+			state.registrationRequest.error = true;
+		},
+		singOutRequest: state => {
+			state.auth = false
+			state.logoutRequest.submitting = true
+		},
+		singOutSuccess(state, action) {
+			state.auth = false
+			state.message = action.payload
+			state.logoutRequest.submitting = false;
+		},
+		singOutFaied: (state) => {
+			state.auth = false
+			state.logoutRequest.submitting = false;
+			state.logoutRequest.error = true;
+		},
+		deleteUserRequest: state => {
+			state.auth = false
+			state.removeRequest.submitting = true
+		},
+		deleteUserSuccess(state) {
+			state.auth = false
+			state.removeRequest.submitting = false;
+		},
+		deleteUserFaied: (state) => {
+			state.auth = false
+			state.removeRequest.submitting = false;
+			state.removeRequest.error = true;
+		},
+		userRequest: state => {
+			state.auth = false
+			state.userRequest.submitting = true
+		},
+		userSuccess(state, action) {
+			state.auth = true
+			state.userRequest.submitting = false;
+			state.user = action.payload
+		},
+		userFaied: (state) => {
+			state.auth = false
+			state.userRequest.submitting = false;
+			state.userRequest.error = true;
+		},
 	}
-};
+})
+
+export default authSlice.reducer
+export const {
+	singInRequest,
+	singInSuccess,
+	singInFaied,
+	setFormValue,
+	registrationRequest,
+	registrationSuccess,
+	registrationFaied,
+	singOutRequest,
+	singOutSuccess,
+	singOutFaied,
+	deleteUserRequest,
+	deleteUserSuccess,
+	deleteUserFaied,
+	userRequest,
+	userSuccess,
+	userFaied
+} = authSlice.actions

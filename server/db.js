@@ -15,6 +15,6 @@ module.exports = new Sequelize(
         },
         idleTimeoutMillis: 1,
         max: 1000,
-        connectionTimeoutMillis: 1000,
+        connectionTimeoutMillis: 10000,
     }
 )

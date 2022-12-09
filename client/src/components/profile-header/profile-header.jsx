@@ -3,7 +3,7 @@ import styles from './profile-header.module.css';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ACTIONTYPE } from '../../utils/constants';
 import { NavLink } from 'react-router-dom';
-import { removeUser, singOut } from '../../services/actions/auth';
+import { removeUser, singOut } from '../../services/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { reportDay, reportTime } from '../../utils/utils';
 import { trackAction } from '../../services/actions/trackActions';
