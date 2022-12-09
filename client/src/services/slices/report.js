@@ -8,6 +8,10 @@ const reportSlice = createSlice({
 			error: false,
 			submitting: false,
 		},
+		trackRequest: {
+			error: false,
+			submitting: false,
+		},
 		message: null
 	},
 	reducers: {
@@ -27,6 +31,16 @@ const reportSlice = createSlice({
 		requestFaied: (state) => {
 			state.reportRequest.submitting = false;
 			state.reportRequest.error = true;
+		},
+		trackRequest: state => { state.trackRequest.submitting = true },
+		postTrackAction(state, action) {
+			state.message = action.payload
+			state.report = []
+			state.trackRequest.submitting = false;
+		},
+		trackFaied: (state) => {
+			state.trackRequest.submitting = false;
+			state.trackRequest.error = true;
 		}
 	}
 })
@@ -36,5 +50,8 @@ export const {
 	getRequest,
 	rangeDaysReport,
 	selectDayReport,
-	requestFaied
+	requestFaied,
+	trackRequest, 
+	trackFaied,
+	postTrackAction
 } = reportSlice.actions

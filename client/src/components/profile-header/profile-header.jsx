@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { removeUser, singOut } from '../../services/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { reportDay, reportTime } from '../../utils/utils';
-import { trackAction } from '../../services/actions/trackActions';
+import { trackAction } from '../../services/actions/reportActions';
 
 
 export const ProfileHeader = () => {
