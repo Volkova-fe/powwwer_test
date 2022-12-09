@@ -9,20 +9,20 @@ import {
 
 import { deleteCookie, setCookie } from "../../utils/utils";
 import {
-	deleteUserFaied,
+	deleteUserFailed,
 	deleteUserRequest,
 	deleteUserSuccess,
-	registrationFaied,
+	registrationFailed,
 	registrationRequest,
 	registrationSuccess,
 	setFormValue,
-	singInFaied,
+	singInFailed,
 	singInRequest,
 	singInSuccess,
-	singOutFaied,
+	singOutFailed,
 	singOutRequest,
 	singOutSuccess,
-	userFaied,
+	userFailed,
 	userRequest,
 	userSuccess
 } from "../slices/auth";
@@ -32,7 +32,7 @@ export const getUser = () => (dispatch) => {
 	dispatch(userRequest())
 	getUserRequest()
 		.then((res) => dispatch(userSuccess(res)))
-		.catch(() => dispatch(userFaied()))
+		.catch(() => dispatch(userFailed()))
 };
 
 export const setRegisterFormValue = (field, value) => (dispatch) => {
@@ -48,7 +48,7 @@ export const registerUser = (email, password, name) => (dispatch) => {
 			return res;
 		})
 		.then((res) => dispatch(registrationSuccess(res)))
-		.catch(() => dispatch(registrationFaied()))
+		.catch(() => dispatch(registrationFailed()))
 };
 
 export const setLoginFormValue = (field, value) => (dispatch) => {
@@ -64,7 +64,7 @@ export const singIn = (email, password) => (dispatch) => {
 			return res;
 		})
 		.then((res) => dispatch(singInSuccess(res)))
-		.catch(() => dispatch(singInFaied()))
+		.catch(() => dispatch(singInFailed()))
 };
 
 export const singOut = () => (dispatch) => {
@@ -75,10 +75,10 @@ export const singOut = () => (dispatch) => {
 			if (res.message === 'success') {
 				dispatch(singOutSuccess(res))
 			} else {
-				dispatch(singOutFaied())
+				dispatch(singOutFailed())
 			}
 		})
-		.catch(() => dispatch(singOutFaied()));
+		.catch(() => dispatch(singOutFailed()));
 };
 
 export const removeUser = (email) => (dispatch) => {
@@ -88,5 +88,5 @@ export const removeUser = (email) => (dispatch) => {
 			deleteCookie('token');
 			dispatch(deleteUserSuccess());
 		})
-		.catch(() => dispatch(deleteUserFaied()))
+		.catch(() => dispatch(deleteUserFailed()))
 };

@@ -58,7 +58,7 @@ const authSlice = createSlice({
 				name: ''
 			}
 		},
-		singInFaied: (state) => {
+		singInFailed: (state) => {
 			state.auth = false
 			state.loginRequest.submitting = false;
 			state.loginRequest.error = true;
@@ -72,7 +72,7 @@ const authSlice = createSlice({
 			state.user = action.payload
 			state.registrationRequest.submitting = false;
 		},
-		registrationFaied: (state) => {
+		registrationFailed: (state) => {
 			state.auth = false
 			state.registrationRequest.submitting = false;
 			state.registrationRequest.error = true;
@@ -86,7 +86,7 @@ const authSlice = createSlice({
 			state.message = action.payload
 			state.logoutRequest.submitting = false;
 		},
-		singOutFaied: (state) => {
+		singOutFailed: (state) => {
 			state.auth = false
 			state.logoutRequest.submitting = false;
 			state.logoutRequest.error = true;
@@ -99,7 +99,7 @@ const authSlice = createSlice({
 			state.auth = false
 			state.removeRequest.submitting = false;
 		},
-		deleteUserFaied: (state) => {
+		deleteUserFailed: (state) => {
 			state.auth = false
 			state.removeRequest.submitting = false;
 			state.removeRequest.error = true;
@@ -113,7 +113,7 @@ const authSlice = createSlice({
 			state.userRequest.submitting = false;
 			state.user = action.payload
 		},
-		userFaied: (state) => {
+		userFailed: (state) => {
 			state.auth = false
 			state.userRequest.submitting = false;
 			state.userRequest.error = true;
@@ -125,18 +125,18 @@ export default authSlice.reducer
 export const {
 	singInRequest,
 	singInSuccess,
-	singInFaied,
+	singInFailed,
 	setFormValue,
 	registrationRequest,
 	registrationSuccess,
-	registrationFaied,
+	registrationFailed,
 	singOutRequest,
 	singOutSuccess,
-	singOutFaied,
+	singOutFailed,
 	deleteUserRequest,
 	deleteUserSuccess,
-	deleteUserFaied,
+	deleteUserFailed,
 	userRequest,
 	userSuccess,
-	userFaied
+	userFailed
 } = authSlice.actions
