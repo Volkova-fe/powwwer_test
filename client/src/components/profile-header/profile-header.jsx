@@ -5,8 +5,7 @@ import { ACTIONTYPE } from '../../utils/constants';
 import { NavLink } from 'react-router-dom';
 import { removeUser, singOut } from '../../services/actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { reportDay, reportTime } from '../../utils/utils';
-import { trackAction } from '../../services/actions/reportActions';
+import { reportAPI } from '../../services/reportServices';
 
 
 export const ProfileHeader = () => {
@@ -15,61 +14,39 @@ export const ProfileHeader = () => {
 	const [start, setStart] = useState(false)
 	const [breakWork, setBreakWork] = useState(false)
 
-	const { email, id } = useSelector(state => state.auth.user);
+	const { email } = useSelector(state => state.auth.user);
+	const [createTrackAction] = reportAPI.useCreateTrackActionMutation();
 
-	const onStartDay = useCallback(() => {
+
+	const onStartDay = useCallback(async () => {
 		setStart(!start);
-		dispatch(trackAction(
-			ACTIONTYPE.start,
-			reportTime(new Date()),
-			reportDay(new Date()), id)
-		)
-	}, [start, id, dispatch]);
+		await createTrackAction(ACTIONTYPE.start)
+	}, [start, createTrackAction])
 
-	const onEndDay = useCallback(() => {
-		dispatch(trackAction(
-			ACTIONTYPE.end,
-			reportTime(new Date()),
-			reportDay(new Date()), id)
-		)
+	const onEndDay = useCallback(async () => {
+		await createTrackAction(ACTIONTYPE.end)
 		setStart(!start);
-	}, [start, id, dispatch]);
+	}, [start, createTrackAction]);
 
-	const onBreakStart = useCallback(() => {
-		dispatch(trackAction(
-			ACTIONTYPE.breakStart,
-			reportTime(new Date()),
-			reportDay(new Date()), id)
-		)
+	const onBreakStart = useCallback(async () => {
+		await createTrackAction(ACTIONTYPE.breakStart)
 		setBreakWork(!breakWork);
-	}, [breakWork, id, dispatch]);
+	}, [breakWork, createTrackAction]);
 
-	const onBreakEnd = useCallback(() => {
-		dispatch(trackAction(
-			ACTIONTYPE.breakEnd,
-			reportTime(new Date()),
-			reportDay(new Date()), id)
-		)
+	const onBreakEnd = useCallback(async () => {
+		await createTrackAction(ACTIONTYPE.breakEnd)
 		setBreakWork(!breakWork);
-	}, [breakWork, id, dispatch]);
+	}, [breakWork, createTrackAction]);
 
-	const onRemoveUser = useCallback(() => {
-		dispatch(trackAction(
-			ACTIONTYPE.removeProfile,
-			reportTime(new Date()),
-			reportDay(new Date()), id)
-		)
+	const onRemoveUser = useCallback(async () => {
+		await createTrackAction(ACTIONTYPE.removeProfile)
 		dispatch(removeUser(email));
-	}, [id, dispatch, email]);
+	}, [createTrackAction]);
 
-	const onLogoutClick = useCallback(() => {
-		dispatch(trackAction(
-			ACTIONTYPE.logout,
-			reportTime(new Date()),
-			reportDay(new Date()), id)
-		)
+	const onLogoutClick = useCallback(async () => {
+		await createTrackAction(ACTIONTYPE.logout)
 		dispatch(singOut());
-	}, [dispatch, id]);
+	}, [createTrackAction]);
 
 	return (
 		<div className={`${styles.header}`}>

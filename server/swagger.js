@@ -48,9 +48,6 @@ const doc = {
 		},
 		TrackerCreate: {
 			type: 'Начал',
-			time: '10:22:55',
-			date: '2022-12-02',
-			id: '1'
 		},
 		TrackerCreateSuccess: {
 			message: 'success'

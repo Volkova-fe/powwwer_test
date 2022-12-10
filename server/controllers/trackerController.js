@@ -1,7 +1,11 @@
 const { Tracker } = require('../models/models')
 const ApiError = require('../error/ApiError')
 const { Op } = require("sequelize");
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { getHours, getMinutes, getSeconds, getYear, getMonth, getDate } = require('date-fns');
+
+const formatDate = `${getYear(new Date())}-${getMonth(new Date()) + 1}-${getDate(new Date())} ${getHours(new Date())}:${getMinutes(new Date())}:${getSeconds(new Date())}`;
+
 
 const generateJwt = (id, email, role, name) => {
 	return jwt.sign(
@@ -28,9 +32,9 @@ class TrackerController {
 				description: 'Invalid request data',
 				}
 		*/
-		const { type, time, date } = req.body
+		const { type } = req.body
 		const token = generateJwt(req.user.id, req.user.email, req.user.role, req.user.name)
-		const tracker = await Tracker.create({ type, time, date, userId: req.user.id })
+		const tracker = await Tracker.create({ type, date: formatDate, userId: req.user.id })
 		if (!tracker) {
 			return next(ApiError.badRequest('не корректное действие'))
 		}
@@ -48,7 +52,10 @@ class TrackerController {
 		const token = generateJwt(req.user.id, req.user.email, req.user.role, req.user.name)
 		const tracker = await Tracker.findAll({
 			where: {
-				date: date,
+				date: {
+					[Op.gte]: `${date} 00:00:00`,
+					[Op.lte]: `${date} 23:59:59`,
+				},
 				userId: req.user.id,
 			}
 		})
@@ -65,13 +72,13 @@ class TrackerController {
 				description: 'Invalid request data',
 				}
 		*/
-		let { from, to} = req.params
+		let { from, to } = req.params
 		const token = generateJwt(req.user.id, req.user.email, req.user.role, req.user.name)
 		const tracker = await Tracker.findAll({
 			where: {
 				date: {
-					[Op.gte]: from,
-					[Op.lte]: to,
+					[Op.gte]: `${from} 00:00:00`,
+					[Op.lte]: `${to} 23:59:59`,
 				},
 				userId: req.user.id,
 			}

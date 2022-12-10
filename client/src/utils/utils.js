@@ -1,4 +1,4 @@
-import { getHours, getMinutes, getSeconds, getYear, getMonth, getDate } from 'date-fns'
+import { getHours, getMinutes, getSeconds, getYear, getMonth, getDate, parseISO } from 'date-fns'
 
 export function getCookie(name) {
 	const matches = document.cookie.match(
@@ -39,7 +39,7 @@ export function reportDay(date)  {
 	return day
 }
 //Formatting the time as 2022-12-03
-export function reportTime (date) {
-	const time = `${getHours(date)}:${getMinutes(date)}:${getSeconds(date)}`;
+export function reportFormatDate (date) {
+	const time = `${getYear(date)}-${getMonth(date)+1}-${getDate(date)} ${getHours(date)}:${getMinutes(date)}:${getSeconds(date)}`;
 	return time
 }
