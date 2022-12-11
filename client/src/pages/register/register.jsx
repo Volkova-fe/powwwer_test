@@ -1,9 +1,10 @@
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useLocation } from 'react-router-dom';
-import { registerUser, setRegisterFormValue } from '../../services/actions/authActions';
+import { setInputFormValue } from '../../services/actions/authActions';
+import { authAPI } from '../../services/authServices';
+import { getCookie } from '../../utils/utils';
 import styles from './register.module.css';
 
 
@@ -12,18 +13,22 @@ export const Register = () => {
 	const location = useLocation();
 	const { email, password, name } = useSelector(state => state.auth.form);
 	const { auth } = useSelector(state => state.auth);
+	const cookie = getCookie('token')
+
+	const [registrationUser] = authAPI.useRegistrationUserMutation();
 
 	//put input value in store Auth
 	const onChange = e => {
-		dispatch(setRegisterFormValue(e.target.name, e.target.value));
+		dispatch(setInputFormValue(e.target.name, e.target.value));
 	}
 
-	const onFormSubmit = e => {
+	const onFormSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(registerUser(email, password, name));
+		await registrationUser({email, password, name})
 	}
+
 	//Redirect user to Profile if auth true
-	if (auth) {
+	if (cookie && auth) {
 		return (<Redirect to={location.state?.from || '/profile'} />);
 	}
 

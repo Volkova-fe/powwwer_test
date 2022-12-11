@@ -1,10 +1,11 @@
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { setLoginFormValue, singIn } from '../../services/actions/authActions';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import styles from './login.module.css';
+import { authAPI } from '../../services/authServices';
+import { setInputFormValue } from '../../services/actions/authActions';
+import { getCookie } from '../../utils/utils';
 
 
 export const Login = () => {
@@ -12,18 +13,23 @@ export const Login = () => {
 	const location = useLocation();
 	const { email, password } = useSelector(state => state.auth.form);
 	const { auth } = useSelector(state => state.auth);
+	const cookie = getCookie('token')
+
+	const [loginUser] = authAPI.useLoginUserMutation();
 
 	//put input value in store Auth
 	const onChange = (e) => {
-		dispatch(setLoginFormValue(e.target.name, e.target.value));
+		dispatch(setInputFormValue(e.target.name, e.target.value));
 	}
+
 	//login request
-	const onFormSubmit = (e) => {
+	const onFormSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(singIn(email, password));
+		await loginUser({ email, password })
 	}
+
 	//Redirect user to Profile if auth true
-	if (auth) {
+	if (cookie && auth) {
 		return (<Redirect to={location.state?.from || '/profile'} />);
 	}
 

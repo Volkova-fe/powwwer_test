@@ -4,15 +4,19 @@ import { getCookie } from '../../utils/utils';
 import styles from './profile.module.css';
 import { ProfileHeader } from '../../components/profile-header/profile-header';
 import { ProfileReport } from '../../components/profile-report/profile-report';
+import { authAPI } from '../../services/authServices';
 import { useSelector } from 'react-redux';
+
 
 
 export const Profile = () => {
 	const cookie = getCookie('token');
+	const { } = authAPI.useCheckUserAuthQuery({ skip: cookie });
 	const { auth } = useSelector(state => state.auth);
 
+
 	//Redirect user to initial page login if delete cookie and auth false
-	if (!auth && !cookie) {
+	if (!cookie && !auth) {
 		return <Redirect to="/" />
 	}
 

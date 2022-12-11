@@ -3,19 +3,20 @@ import styles from './profile-header.module.css';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ACTIONTYPE } from '../../utils/constants';
 import { NavLink } from 'react-router-dom';
-import { removeUser, singOut } from '../../services/actions/authActions';
-import { useDispatch, useSelector } from 'react-redux';
 import { reportAPI } from '../../services/reportServices';
+import { authAPI } from '../../services/authServices';
+import { useSelector } from 'react-redux';
 
 
 export const ProfileHeader = () => {
-	const dispatch = useDispatch();
-
 	const [start, setStart] = useState(false)
 	const [breakWork, setBreakWork] = useState(false)
 
 	const { email } = useSelector(state => state.auth.user);
+
 	const [createTrackAction] = reportAPI.useCreateTrackActionMutation();
+	const [logoutUser] = authAPI.useLogoutUserMutation();
+	const [removeUser] = authAPI.useRemoveUserMutation();
 
 
 	const onStartDay = useCallback(async () => {
@@ -40,12 +41,12 @@ export const ProfileHeader = () => {
 
 	const onRemoveUser = useCallback(async () => {
 		await createTrackAction(ACTIONTYPE.removeProfile)
-		dispatch(removeUser(email));
+		await removeUser({ email })
 	}, [createTrackAction]);
 
 	const onLogoutClick = useCallback(async () => {
 		await createTrackAction(ACTIONTYPE.logout)
-		dispatch(singOut());
+		await logoutUser()
 	}, [createTrackAction]);
 
 	return (

@@ -16,7 +16,11 @@ export const ReportRangeDays = () => {
 	const [dateRange, setDateRange] = useState([null, null]);
 	const [startRangeDate, endRangeDate] = dateRange;
 
-	const { data: reportRangeDaysResult = [] } = reportAPI.useGetRangeDaysReportQuery({from :reportDay(startRangeDate), to: reportDay(endRangeDate)}, {skip: dateRange[1] === null});
+	const { data: reportRangeDaysResult = [] } = reportAPI.useGetRangeDaysReportQuery({
+		from: reportDay(startRangeDate), to: reportDay(endRangeDate)
+	},
+		{ skip: dateRange[1] === null }
+	);
 
 	const rangeDaysref = createRef();
 

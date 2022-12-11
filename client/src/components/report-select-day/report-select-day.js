@@ -68,7 +68,7 @@ export const ReportSelectDay = () => {
 			/>
 			<div>
 				{/* Rendering report elements */}
-				{reportSelectDayResult.map((elem) => <ReportElement key={elem.id} item={elem} />)}
+				{reportSelectDayResult && reportSelectDayResult.map((elem) => <ReportElement key={elem.id} item={elem} />)}
 			</div>
 		</div>
 	)
