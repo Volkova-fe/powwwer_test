@@ -21,7 +21,7 @@ export const authAPI = createApi({
 					password,
 					name
 				},
-			})
+			}),
 		}),
 		loginUser: build.mutation({
 			query: ({ email, password }) => ({
@@ -31,7 +31,7 @@ export const authAPI = createApi({
 					email,
 					password,
 				}
-			})
+			}),
 		}),
 		logoutUser: build.mutation({
 			query: () => ({
@@ -40,19 +40,19 @@ export const authAPI = createApi({
 				body: {
 					token: getCookie('token')
 				}
-			})
+			}),
 		}),
 		removeUser: build.mutation({
 			query: ({ email }) => ({
 				url: 'api/user/delete',
 				method: 'DELETE',
 				body: { email: email }
-			})
+			}),
 		}),
 		checkUserAuth: build.query({
 			query: () => ({
 				url: '/api/user/auth'
-			})
+			}),
 		}),
 	})
 })

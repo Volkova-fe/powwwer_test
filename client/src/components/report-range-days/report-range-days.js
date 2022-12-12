@@ -1,7 +1,7 @@
 import React, { createRef, forwardRef, useState } from 'react';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ReportElement } from '../report-element/report-element';
-import { reportDay } from '../../utils/utils';
+import { reportDay, reportFormatDate } from '../../utils/utils';
 
 //Imports for Calendar
 import { startOfWeek, lastDayOfWeek } from 'date-fns'
@@ -68,7 +68,7 @@ export const ReportRangeDays = () => {
 			/>
 			<div>
 				{/* Rendering report elements */}
-				{reportRangeDaysResult && reportRangeDaysResult.map((elem) => <ReportElement key={elem.id} item={elem} />)}
+				{reportRangeDaysResult && reportRangeDaysResult.map((elem) => <ReportElement key={elem.id} createdAt={reportFormatDate(elem.createdAt)} type={elem.type} />)}
 			</div>
 		</div>
 	)

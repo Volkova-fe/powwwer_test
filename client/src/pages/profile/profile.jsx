@@ -11,13 +11,17 @@ import { useSelector } from 'react-redux';
 
 export const Profile = () => {
 	const cookie = getCookie('token');
-	const { } = authAPI.useCheckUserAuthQuery({ skip: cookie });
+	const { isLoading } = authAPI.useCheckUserAuthQuery({ skip: cookie });
 	const { auth } = useSelector(state => state.auth);
 
 
 	//Redirect user to initial page login if delete cookie and auth false
 	if (!cookie && !auth) {
 		return <Redirect to="/" />
+	}
+
+	if(isLoading) {
+		return <h1>Идет загрузка ...</h1>
 	}
 
 	return (

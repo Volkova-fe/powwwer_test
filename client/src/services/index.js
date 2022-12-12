@@ -4,7 +4,6 @@ import { reportAPI } from './reportServices';
 import authSlice from "./feature/authSlice";
 
 
-
 export const rootReducer = combineReducers({
 	auth: authSlice,
 	[reportAPI.reducerPath]: reportAPI.reducer,

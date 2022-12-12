@@ -1,6 +1,5 @@
 const sequelize = require('../db')
 const { DataTypes } = require('sequelize')
-const moment = require('moment');
 
 const User = sequelize.define('user', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -13,13 +12,10 @@ const User = sequelize.define('user', {
 const Tracker = sequelize.define('tracker', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     type: { type: DataTypes.STRING },
-    date: {
-        type: DataTypes.DATE(6),
-        get() {
-            return moment(this.getDataValue('date')).locale('ru').format('DD-MM-YYYY HH:mm:ss');
-        },
-        allowNull: false
-    },
+    createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    }
 })
 
 

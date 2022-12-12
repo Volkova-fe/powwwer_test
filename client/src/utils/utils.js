@@ -1,4 +1,6 @@
 import { getHours, getMinutes, getSeconds, getYear, getMonth, getDate, parseISO } from 'date-fns'
+import moment from 'moment';
+
 
 export function getCookie(name) {
 	const matches = document.cookie.match(
@@ -39,7 +41,6 @@ export function reportDay(date)  {
 	return day
 }
 //Formatting the time as 2022-12-03
-export function reportFormatDate (date) {
-	const time = `${getYear(date)}-${getMonth(date)+1}-${getDate(date)} ${getHours(date)}:${getMinutes(date)}:${getSeconds(date)}`;
-	return time
+export const reportFormatDate = (date) => {
+	return moment(date).locale('ru').format('DD-MM-YYYY HH:mm:ss')
 }
